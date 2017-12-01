@@ -1,0 +1,4 @@
+.swiperContent{overflow: hidden; padding: 0; margin: 0; position: relative; }
+.swiperContent>ul{overflow: hidden; padding: 0; margin: 0; transition: transform 0.3s;}
+.swiperContent>ul>li{list-style: none; float: left;}
+.swiperContent>ul>li>img{width: 100%;}

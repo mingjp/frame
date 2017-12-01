@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="../../../../libs/vue/vue.js"></script>
+	<script type="text/javascript" src="../../../../libs/vue/vue-router.js"></script>
+</head>
+<body>
+	<div id="app">
+		<router-link to="/sam/30">sam</router-link>
+		<router-link to="/tom/42">tom</router-link>
+		<router-view></router-view>
+	</div>
+
+	<script type="text/javascript">
+		var Sam = { template: '<div><h1>Sam {{$route.params.age}}</h1></div>' };
+		var Tom = { template: '<div><h1>Tom {{$route.params.age}}</h1></div>' };
+
+		var routes = [		
+			{path: '/sam/:age', component: Sam},
+			{path: '/tom', component: Tom}
+		]
+
+		var router = new VueRouter({
+			routes: routes
+		})
+
+		var vm = new Vue({
+			el: '#app',
+			router: router
+		});
+		//手动挂载
+		// vm.$mount('#app')
+	</script>
+</body>
+</html>

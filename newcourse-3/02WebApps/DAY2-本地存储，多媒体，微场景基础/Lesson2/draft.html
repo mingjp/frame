@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link href="jquery.imgwall.css" rel="stylesheet" />
+
+    <script src="../../libs/jquery/jquery-2.1.1.min.js"></script>
+    <script src="jquery.imgwall.js"></script>
+
+    <script type="text/javascript">
+        window.onload = function () {
+            $.imgwall({
+                col: 10// 列数
+            })
+        };
+    </script>
+</head>
+<body>
+    <div class="content">
+        <img src="images/11.png" />
+        <img src="images/12.png" />
+        <img src="images/13.png" />
+        <img src="images/14.png" />
+        <img src="images/15.png" />
+        <img src="images/16.png" />
+        <img src="images/17.png" />
+        <img src="images/18.png" />
+        <img src="images/19.png" />
+        <img src="images/apic17464.jpg" />
+        <img src="images/apic17675.jpg" />
+        <img src="images/apic17723.jpg" />
+        <img src="images/apic17955.jpg" />
+        <img src="images/apic17969.jpg" />
+        <img src="images/apic18388.jpg" />
+        <img src="images/apic18701.jpg" />
+        <img src="images/apic18857.jpg" />
+        <img src="images/apic18869.jpg" />
+        <img src="images/apic18971.jpg" />
+        <img src="images/apic19085.jpg" />
+        <img src="images/20.png" />
+        <img src="images/22.png" />
+        <img src="images/23.png" />
+        <img src="images/apic15055.jpg" />
+        <img src="images/apic15203.jpg" />
+        <img src="images/apic15689.jpg" />
+        <img src="images/apic17350.jpg" />
+
+        <img src="images/sm1.jpg" />
+        <img src="images/sm2.jpg" />
+        <img src="images/sm3.jpg" />
+        <img src="images/sm4.jpg" />
+        <img src="images/sm5.jpg" />
+        <img src="images/sm6.jpg" />
+    </div>
+    <script type="text/javascript">
+        //x => 总人数
+        //y => 每组多少人
+        function group(x, y){
+            //{1: [], 2:[]}
+            var allPerson = [];
+            var result = {};
+            var groupCount = Math.ceil(x / y);
+            for(var i = 1; i <= groupCount; i++){
+                result[i] = [];
+                while(allPerson.length < x && result[i].length < y){
+                    var n = parseInt(Math.random() * x) + 1;
+                    if(allPerson.indexOf(n) < 0 ){
+                        allPerson.push(n);
+                        result[i].push(n);
+                    }          
+                }
+            }
+            return result;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+<script>
+	
+	var url = require('url');
+
+	var urlObj = { 
+		firstname: 'dk',
+		url: 'http://dk-lan.com',
+		lastname: 'tom',
+		passowrd: '123456' 
+	}
+	var urlString = url.format(urlObj);
+	console.log(urlString);
+</script>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        function show(arry){
+            var res=[];
+            for(var i=0;i<arry.length;i++){
+                if(Array.isArray(arry[i])){
+                    res.push(show(arry[i]))
+                }else{
+                    res.push(arry[i])
+                }
+                return res;
+            }
+            // arry.forEach(function(item){
+            //      if(item.length>0){
+            //         show(item)
+            //      }else{
+                    
+            //         res.push(item);
+            //      }
+            //      console.log(item);
+            // })
+            // console.log(res)
+            
+        }
+        show([1,[[2,3],4]]);
+    </script>
+    
+</body>
+</html>

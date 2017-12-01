@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="../../../../libs/vue/vue.js"></script>
+	<script type="text/javascript" src="../../../../libs/vue/vue-router.js"></script>
+</head>
+<body>
+	<div id="app">
+		<router-link to="/floor1">一楼</router-link>
+		<router-view></router-view>
+	</div>
+
+	<script type="text/javascript">
+		var Floor1 = {
+			template: `
+				<div>
+					<h1>一楼</h1>
+					<router-link to="/floor1/floor2">二楼</router-link>
+					<router-view></router-view>
+				</div>
+			`
+		}
+
+		var Floor2 = {
+			template: '<h1>二楼</h1>'
+		}
+
+		var router = new VueRouter({
+			routes: [
+				{
+					path: '/floor1',
+					component: Floor1,
+					name: 'floor1',
+					children: [
+						{
+							path: 'floor2',
+							component: Floor2,
+							name: 'floor2'
+						}
+					]
+				},
+
+			]
+		})
+
+		var vm = new Vue({
+			el: '#app',
+			router: router
+		});
+		//手动挂载
+		// vm.$mount('#app')
+	</script>
+</body>
+</html>

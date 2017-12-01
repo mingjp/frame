@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<!-- React 的核心库 -->
+	<script type="text/javascript" src="../../../libs/react/react.js"></script>
+	<!-- 提供与 DOM 相关的功能 -->
+	<script type="text/javascript" src="../../../libs/react/react-dom.js"></script>
+	<!-- 将 JSX 语法转为 JavaScript 语法 -->
+	<script type="text/javascript" src="../../../libs/react/browser.min.js"></script>
+
+	<script type="text/javascript" src="../../../libs/jquery/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+	<div id="div1"></div>
+	<div id="div2"></div>
+
+	<script type="text/babel">
+		// Component => 组件
+		// var name = 'Sam';
+		// var obj = {name: 'Sam'};
+		// var array = ['Tom', 'Sam'];
+
+		// ReactDOM.render(<div f='Lucy'>{array}</div>, document.getElementById('div2'));
+
+		//定义组件
+		var Component1 = React.createClass({
+			// getInitialState: function(){
+
+			// },
+			// render: function(){
+
+			// },
+			// change: function(){
+			// 
+			// },
+			// componentWillMount: function(){
+			// 
+			// }
+
+			//初始化组件要用到的数据对象
+			//var state = {};
+			getInitialState() {
+				return {name: 'Sam'};
+			},
+			change: function(event){
+				// this.state.name = event.target.value;
+				this.setState({name: event.target.value});
+				console.log(event.target.value);
+
+			},
+			click: function(event){
+				console.log('click event');
+				// document.getElementById('input').focus();
+				// console.log(this.refs.input);
+				var self = this;
+				this.refs.input.focus();
+				$.getJSON('src/data/demo.json', function(_response) {
+					// console.log(_response);
+					// $('#input').val(_response.name);
+					self.setState({name: _response.name});
+				});
+				// console.log(event.target);
+			},
+			componentWillMount() { 
+				//渲染前执行，component 还没有渲染到文档
+				console.log('componentWillMount');
+				console.log($('#input')[0]);
+				// $('#div1').remove();
+			},
+			componentDidMount() {
+				//渲染前执行，component 已经渲染到文档
+				console.log('componentDidMount');
+				console.log($('#input')[0]);
+			},
+			//组件里面必须有 render 方法
+			render(){
+				//表单元素如果用了 value 属性，则需要添加一个 onChange 的方法，如果没有此方法，则该元素为只读
+				//表单元素可以使用 defaultValue 赋初始值，不需要添加 onChange 方法，不会变成只读
+				//只能有一个顶层标签
+				return( 
+					<div>
+						<p>{this.props.api}</p>
+						<input type="text" id="input" value={this.state.name} onChange={this.change} ref="input"/>
+						<input type="button" value="focus" onClick={this.click} />
+						<p>{this.state.name}</p>
+					</div>
+				);
+			}
+		});
+		
+		ReactDOM.render(<Component1 api="myApi"></Component1>, document.getElementById('div1'));
+
+		// console.log(document.getElementsByTagName('input')[0].foucs());
+	</script>	
+	<script type="text/javascript">
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="../vue.js"></script>
+        <script src="../jquery-2.1.1.min.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <!-- <h1>{{reversedMessage}}</h1>
+            <h1>{{reversedMessage1}}</h1> -->
+            <input type="text" v-model="account" />
+            <table>
+                <thead>
+                    <tr>
+                        <th v-for="(value, key) in dataset[0]">{{key}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(obj, index) in dataset">
+                        <td v-for="(value, key) in obj">{{value}}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>
+                            <a href="javascript:" v-for="(value, index) in pageCount" @click="pageHandler(value)">{{value}}</a>
+                        </th>
+                    </tr>
+                </tfoot>>
+            </table>
+        </div>
+
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    pageCount: 5,
+                    pageIndex: 1,
+                    dataset: [],
+                    keyword: '',
+                    getdata: function(){
+                        $.get('http://localhost/course/api/api/student/FetchAllStudent', {pageindex: this.pageIndex, account: this.keyword}, function(response){
+                            this.dataset = response.data;
+                        }.bind(this));                        
+                    }
+                },
+                methods: {
+                    pageHandler: function(_page){
+                        this.pageIndex = _page;
+                    }
+                },
+                computed: {
+                    account: {
+                        get: function(o){
+                            console.log('nameComputed-get', o);
+                            return this.keyword;
+                        },
+                        set: function(newVal){
+                            this.keyword = newVal;
+                            console.log('nameComputed-set', newVal);
+                            this.getdata();
+                        }
+                    }
+                },
+                watch: {
+                    pageIndex: function(){
+                        this.getdata();                        
+                    }
+                },
+                beforeMount: function(){
+                    this.getdata();
+                }
+            })
+        </script>
+    </body>
+</html>

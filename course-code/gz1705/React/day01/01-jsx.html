@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="../../../../libs/react/react.js"></script>
+	<script type="text/javascript" src="../../../../libs/react/react-dom.js"></script>
+	<script type="text/javascript" src="../../../../libs/react/browser.min.js"></script>
+</head>
+<body>
+	<div id="app1"></div>
+	<div id="app2"></div>
+	<div id="app3"></div>
+	<script type="text/babel">
+		//JSX
+		//DOM 元素 html => 数据结构
+		//虚拟DOM
+		var name = "Tom";
+		ReactDOM.render(<div><input type="" name=""/></div>, document.getElementById('app1'));
+		ReactDOM.render(<p style={{color: 'red'}}>{2 * 2}</p>, document.getElementById('app2'));
+
+		var dataset = [{name: 'Tom', age: 20}, {name: 'Sam', age: 22}];
+		ReactDOM.render(<div>
+			{
+				dataset.map(function(item, index){
+					return <h1 key={index}>{item.name}</h1>
+				})
+			}
+		</div>, document.getElementById('app3'));
+	</script>
+</body>
+</html>

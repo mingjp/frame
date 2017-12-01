@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style type="text/css">
+        div{width:300px; height:100px; border:solid 1px #ccc;}
+    </style>
+    <script src="../../../libs/jquery/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript">
+
+        /*
+        //给 jQuery 扩展出来的全局属性或方法（事件）
+$.extend({
+  funA: function(){
+    console.log('funA');
+  },
+  paramsA: 'paramsA'
+})
+$.funA()
+
+___________________________________________________________________________________
+//两个对象合并为一个全新的对象(克隆)
+var obj1 = {a: 'a', b: 'b'};
+var obj2 = {c: 'c', d: 'd', a: 'a2'};
+
+var obj3 = $.extend(obj1, obj2);
+
+obj3.a;
+        */
+        //(function ($) {
+        //})(jQuery);
+        //$('#id');
+        //jQuery('#id');
+
+        //块级函数
+        (function ($) {
+            $.dkDialog = function (opts) {
+                var _default = {
+                    element: null
+                };
+                var opt = $.extend(_default, opts);
+                $.each(opt.buttons, function (i, btn) {
+                    //循环生成的按钮元素
+                    var $button = $('<button>' + btn.title + '</button>').appendTo(opt.element);
+
+                    $button.close = function () {
+                        opt.element.remove();
+                    }
+
+                    $button.on(btn.eventType, function () {
+                        btn.event($button);
+                    })
+                })
+            };
+        })(jQuery);
+
+        $(function () {
+            $.dkDialog({
+                element: $('div'),
+                buttons: [{
+                    title: 'close',
+                    eventType: 'click',
+                    event: function (btn) {
+                        btn.close();
+                        console.log('The dialog is closed');
+                    }
+                }, {
+                    title: 'confirm',
+                    eventType: 'click',
+                    event: function (btn) {
+                        btn.close();
+                        console.log('confirm');
+                    }
+                }]
+            });
+        })
+    </script>
+</head>
+<body>
+    <div id="div"></div>
+</body>
+</html>

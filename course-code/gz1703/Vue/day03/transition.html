@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="../vue.js"></script>
+        <style>
+            li{list-style: none; background: #ccc; width: 300px; padding: 10px; margin-bottom: 5px;}
+            .v-enter{transform: translateX(200px);}
+            .v-enter-active{transform: translateX(0);}
+            .v-leave-active{transform: translateX(-200px);}
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <div>
+                <input type="button" value="AddItem" @click="addItem">
+                <input type="button" value="RemoveItem" @click="removeItem">
+            </div>
+            <transition-group tag="ul" name="v">
+                <li v-for="(value, index) in dataset" :key="index">Item {{value}}</li>
+            </transition-group>
+        </div>
+
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    dataset: [1,2,3]
+                },
+                methods: {
+                    addItem: function(){
+                        var _random = parseInt(Math.random() * this.dataset.length);
+                        this.dataset.splice(_random, 0, this.dataset.length + 1);
+                    },
+                    removeItem: function(){}
+                }
+            })
+        </script>
+    </body>
+</html>

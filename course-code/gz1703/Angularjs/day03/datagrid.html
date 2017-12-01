@@ -1,0 +1,14 @@
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th ng-repeat="(key, value) in dataset[0]" ng-bind="key"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="row in dataset">
+                <td ng-repeat="(key, value) in row" ng-bind="value"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="../../../../../lib/vue.js"></script>
+	<script type="text/javascript" src="../../../../../libs/jquery/jquery-2.1.1.min.js"></script>	
+</head>
+<body>
+	<div id="app">
+		<datagrid api="http://localhost:88/products" :title="a"></datagrid>
+		<component1></component1>
+		<select>
+			<option is="option1"></option>
+		</select>
+	</div>
+
+	<script type="text/javascript">
+		//组件(Component)
+		//全局
+		Vue.component('datagrid',{
+			template: `
+				<div>
+					<h1>datagrid-{{title}}</h1>
+					<table>
+						<thead>
+							<th v-for="(value, key) in dataset[0]">{{key}}</th>
+						</thead>
+						<tbody>
+							<tr v-for="(obj, index) in dataset">
+								<td v-for="(value, key) in obj">{{value}}</td>
+							</tr>
+						</tbody>
+					</table>	
+				</div>			
+			`,
+			props: ['api', 'title'],
+			data: function(){
+				return {
+					dataset: [],
+					a: 'global-title'
+				}
+			}
+		})
+		//局部
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				count: 100,
+				a: 'private-title1'
+			},
+			components: {
+				"component1": {
+					template: '<input type="button" :value="count" @click="counter"/>',
+					data: function(){
+						return {count: 0};
+					},
+					methods: {
+						counter: function(){
+							this.count += 1;
+						}
+					}
+				},
+				"option1": {
+					template: '<option>1</option>'
+				} 
+			}
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="../vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h3>{{message}}</h3>
+            <p>{{name}}</p>
+            <p>{{age}}</p>
+            <!--指令 v- -->
+            <!--v-bind:属性名称 ===> :属性名称  -->
+            <p v-html="html" :id="id" v-if="show"></p>
+            <p>{{1 == 1 ? "ok" : "no ok"}}</p>
+            <!-- <p v-bind:class="class"></p> -->
+            <div v-for="(value, index) in data" :id="value">
+                <h3>{{"Value: " + value + " Index: " + index}}</h3>
+            </div>
+            <div v-for="(obj, index) in dataArray" :id="index">
+                <h2>{{"姓名：" + obj.name + "年龄：" + obj.age}}</h2>
+            </div>
+            <input type="button" value="click me" @click="say1"/>
+            <input type="text" v-model="message"/>
+        </div>
+
+        <script>
+            
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    message: '我是通过映射显示的文本',
+                    name: 'Tom',
+                    age: 18,
+                    show: false,
+                    html: '<h1>1000phone.com</h1>',
+                    id: 123456,
+                    data: 2,
+                    dataArray: [{name: 'dk1', age: 18}, {name: 'dk2', age: 20}]
+                },
+                methods: {
+                    say1: function(){
+                        this.message = "gz1703";
+                        console.log(this);
+                        console.log(123);
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

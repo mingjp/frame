@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<script type="text/javascript" src="../../../../libs/angular/angular.min.js"></script>
+
+	<script type="text/javascript" src="../../../../libs/vue/vue.js"></script>
+
+	<script type="text/javascript" src="../../../../libs/jquery/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+	<div ng-app="myApp" ng-controller="myController">
+		<input type="text" ng-model="name" />
+		<input type="text" ng-model="age" />
+		<select name="" ng-model="sex">
+			<option value="男">男</option>
+			<option value="女">女</option>
+		</select>
+		<input type="button" value="additem" ng-click="addItem()">
+		<br>
+		<table>
+			<thead>
+				<tr>
+					<th>name</th>
+					<th>age</th>
+					<th>sex</th>
+					<th>delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="item in items">
+					<td ng-bind="item.name + $index"></td>
+					<td ng-bind="item.age"></td>
+					<td ng-bind="item.sex"></td>
+					<td>
+						<input type="button" value="delete" ng-click="delItem($index)">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<script type="text/javascript">
+		const myApp = angular.module('myApp', []);
+		myApp.controller('myController', ['$scope', function ($scope) {
+			$scope.items = [];
+			$scope.addItem = function(){
+				var obj = {
+					name: $scope.name,
+					age: $scope.age,
+					sex: $scope.sex
+				};
+				$scope.items.push(obj);
+			}
+
+			$scope.delItem = function(index){
+				console.log(index);
+				$scope.items.splice(index, 1);
+			}
+		}])
+	</script>
+
+	<div id="app">
+		<input type="text" v-model="name" />
+		<input type="text" v-model="age" />
+		<select name="" v-model="sex">
+			<option value="男">男</option>
+			<option value="女">女</option>
+		</select>
+		<input type="button" value="additem" @click="addItem()">
+		<br>
+		<table>
+			<thead>
+				<tr>
+					<th>name</th>
+					<th>age</th>
+					<th>sex</th>
+					<th>delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr v-for="(item, index) in items">
+					<td>{{item.name}}</td>
+					<td>{{item.age}}</td>
+					<td>{{item.sex}}</td>
+					<td>
+						<input type="button" value="delete" @click="delItem(index)">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<input type="button" name="" value="addItem" id="btn">
+	<script type="text/javascript">
+		//与 ng 的区别
+		//属性一定要先定义再使用
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				name: 'Sam',
+				age: 18,
+				sex: '男',
+				items: [],
+				addItem: function(){
+					console.log(this);
+					var obj = {
+						name: this.name,
+						age: this.age,
+						sex: this.sex
+					};
+					this.items.push(obj);
+				},
+				delItem: function(index){
+					this.items.splice(index, 1);
+				}
+			}
+		});
+
+		$(function(){
+			$('#btn').click(function(){
+				vm.name = 'Sam';
+				vm.age= 100;
+				vm.sex = "女";
+				vm.addItem();
+			})
+		})
+
+		// var funA = function(){
+		// 	return {
+		// 		name: 'Tom',
+		// 		get: function(){
+		// 			this.name
+		// 		}
+		// 	};
+		// }
+
+		// var funB = function(_args){
+		// }
+
+		// funB(funA); // _args = > function  => _args() => this => window
+		// funB(funA()) // _args => 1
+	</script>
+</body>
+</html>

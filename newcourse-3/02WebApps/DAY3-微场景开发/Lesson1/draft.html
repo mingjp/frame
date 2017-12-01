@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0" name="viewport" />
+	<script type="text/javascript" src="../../../../libs/jquery/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="dktouch.js"></script>
+	<style type="text/css" media="screen">
+		div{transition: all 0.8s;}
+		div:nth-child(1){position: fixed; top: 0; right: 0; bottom: 0; left: 0; background-color: #ccc;}
+		div:nth-child(2){position: fixed; top: 0; right: 0; bottom: 0; left: 0; background-color: red; transform: translateY(100%);}
+	</style>
+</head>
+
+<body>
+	<div></div>
+	<div></div>
+
+	<script type="text/javascript">
+		var dktouch = new DKTouch({
+			toRight: function(){
+				console.log('toRight');
+			}, toUp: function(){
+				document.getElementsByTagName('div')[1].style.transform = 'translateY(0)';
+			}
+		});
+	</script>
+</body>
+</html>

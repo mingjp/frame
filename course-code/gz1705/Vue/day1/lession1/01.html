@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="../../../../../libs/vue/vue.js"></script>
+</head>
+<body>
+	<div id="div1">
+		<h1></h1>
+		<h2></h2>
+	</div>
+	<div id="app">
+		<h1>{{message}}</h1>
+		<h2>{{name}}DK</h2>
+		<h3>{{age}}</h3>
+		<h4>{{data.name}}</h4>
+		<div v-html="html"></div>
+		<img :src="src" v-if="show">
+		<a v-bind:href="href" v-bind:dk="message + 'DK'">1000phone</a>
+		<input type="text" v-model="message">
+		<p v-for="(val, index) in n">
+			<span>{{val}}</span>
+			<span>{{index}}</span>
+		</p>
+		<table>
+			<thead>
+				<tr>
+					<th v-for="(value, key) in dataset[0]">{{key}}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr v-for="(obj, index) in dataset">
+					<td v-for="(value, key) in obj">{{value}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<script type="text/javascript">
+		document.getElementById('div1').innerText = "aa";
+
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				dataset: [{name: 'dk1', age: 18}, {name: 'dk2', age: 20}] ,
+				message: "我是通过映射显示的文本",
+				html: "<h1>123</h1>",
+				src: 'green.jpg',
+				href: 'www.1000phone.com',
+				data: {
+					name: "Sam",
+					age: 22
+				},
+				name: "Tom",
+				age: 18,
+				show: 1 == 2,
+				n: 5
+			}
+		})
+	</script>
+</body>
+</html>

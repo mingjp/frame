@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css"  href="../../../../libs/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css"  href="../../../../libs/bootstrap/datepicker/css/datepicker.css">
+
+        <script src="../vue.js"></script>
+        <script src="../jquery-2.1.1.min.js"></script>
+        <script src="../../../../libs/bootstrap/datepicker/js/bootstrap-datepicker.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <input type="text" v-model="name" id="text">
+            <h3>{{name}}</h3>
+
+            <input type="text" name="a" id="datepicker" :value="dataset.data.date" model="dataset.data.date" v-datepicker>
+            <h3>{{date}}</h3>
+
+            <input type="button" name="" value="set" @click="set">
+            <h1>{{fd.name}}</h1>
+        </div>
+        
+        <script>
+            // $(function(){
+            //     $('#datepicker').datepicker({
+            //         language: 'zh-CN',
+            //         pickTime: false,
+            //         todayBtn: true,
+            //         autoclose: true                
+            //     });
+            // })
+
+            Vue.directive('datepicker', {
+                inserted: function(element, arg2, arg3){
+                    console.log(arg3.context);
+                    $('#datepicker').datepicker({
+                        language: 'zh-CN',
+                        pickTime: false,
+                        todayBtn: true,
+                        autoclose: true                
+                    }).on('changeDate', function(){
+                        //['dataset', 'data', 'date']
+                        var attrs = arg3.data.attrs.model.split('.');
+                        var midobj = vm[attrs[0]];// vm.dataset
+                        for(var i = 1; i < attrs.length; i++){
+                            if(i == attrs.length - 1){
+                                midobj[attrs[i]] = $(this).val();
+                            } else {
+                                midobj = midobj[attrs[i]];
+                            }
+                        }
+                        vm.dataset.date = $(this).val();
+                    });                    
+                }
+            })
+
+
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    name: 'Tom',
+                    date: '2017-08-24',
+                    dataset: {
+                        data: {
+                            date: '2017-08-24'
+                        }
+                    },
+                    formdata: {
+                        date: '2017-08-24'
+                    },
+                    fd: {}
+                },
+                methods: {
+                    set: function(){
+                        this.$set(this.fd, 'name', 'Sam');
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,108 @@
+body {
+  background: #fff;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 0;
+  padding: 30px;
+}
+
+a {
+  color: #4183c4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+code {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  font-family: "Bitstream Vera Sans Mono", Consolas, Courier, monospace;
+  font-size: 12px;
+  margin: 0 2px;
+  padding: 0px 5px;
+}
+
+h1, h2, h3, h4 {
+  font-weight: bold;
+  margin: 0 0 15px;
+  padding: 0;
+}
+
+h1 {
+  border-bottom: 1px solid #ddd;
+  font-size: 2.5em;
+  font-weight: bold;
+  margin: 0 0 15px;
+  padding: 0;
+}
+
+h2 {
+  border-bottom: 1px solid #eee;
+  font-size: 2em;
+}
+
+h3 {
+  font-size: 1.5em;
+}
+
+h4 {
+  font-size: 1.2em;
+}
+
+p, ul {
+  margin: 15px 0;
+}
+
+ul {
+  padding-left: 30px;
+}
+
+
+.example-enter,
+.example-leave {
+  -webkit-transition: all 2s;
+  transition: all 2s;
+}
+
+.example-enter,
+.example-leave.example-leave-active {
+  opacity: 0.01;
+}
+
+.example-leave.example-leave-active {
+  margin-left: -128px;
+}
+
+.example-enter {
+  margin-left: 128px;
+}
+
+.example-enter.example-enter-active,
+.example-leave {
+  margin-left: 0;
+  opacity: 1;
+}
+
+.animateExample {
+  display: block;
+  height: 128px;
+  position: relative;
+  width: 384px;
+}
+
+.animateItem {
+  color: white;
+  font-size: 36px;
+  font-weight: bold;
+  height: 128px;
+  line-height: 128px;
+  position: absolute;
+  text-align: center;
+  -webkit-transition: all 2s; /* TODO: make this a move animation */
+  transition: all 2s; /* TODO: make this a move animation */
+  width: 128px;
+}

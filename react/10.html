@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>兄弟组件的通信</title>
+    <script src="../lib/react/react.js" type="text/javascript"></script>
+    <script src="../lib/react/react-dom.js" type="text/javascript"></script>
+    <script src="../lib/react/browser.min.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="app">
+        
+    </div>
+
+    <script type="text/babel">
+        var ParentComponent = React.createClass({
+            getInitialState:function(){
+                return{
+                    text:''
+                }
+            },
+            change2:function(text){
+                this.refs.child2.changeState(text)
+            },
+            change1:function(text){
+                this.refs.child1.changeState(text)
+            },
+            render:function(){
+                return(
+                    <div>
+                        <input type="text"/>
+                        <Child1 change={this.change2}  ref="child1" />
+                        <Child2 change={this.change1} ref="child2"/>
+
+                    </div>
+                    )
+            }
+        });
+
+        var Child1 = React.createClass({
+            getInitialState:function(){
+                return{
+                    text:''
+                }
+            },
+            change1:function(event){
+                this.props.change(event.target.value);
+            },
+            changeState: function(text){
+                this.setState({text: text});
+            },
+            render:function(){
+                return (
+                    <div>
+                        <label>child1</label><input type="text" onChange={this.change1}/>
+                        <p>child1{this.state.text}</p>
+                    </div>
+                    )
+            }
+        })
+        var Child2 = React.createClass({
+            getInitialState:function(){
+                return{
+                    text:''
+                }
+            },
+            changeState: function(text){
+                this.setState({text: text});
+            },
+            change2:function(event){
+                this.props.change(event.target.value);
+            },
+            render:function(){
+                return(
+                    <div>
+                        <label>child2</label><input type="text" onChange={this.change2} />
+                        <p>child2{this.state.text}</p>
+
+                    </div>
+                    )
+            }
+
+        })
+        ReactDOM.render(<ParentComponent/>,document.getElementById('app'))
+    </script>
+</body>
+</html>

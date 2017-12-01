@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+		function funA(arr, length){
+		    for(var i=0;i<length-1;i++){
+		         if(arr[i]>arr[i+1]){
+		              var jjk = arr[i];
+		              arr[i] = arr[i+1];
+		              arr[i+1] = jjk;
+		         }         
+		    }
+		    //[2,1,3]
+		    length--; //2
+		    console.log(length);
+		    while(length>1){
+		      var obj = {};
+		      obj.dk = funA(arr,length);//funA([2,1,3], 2)
+		      var obj2 = [];
+		    }    
+		}
+
+		funA([3,2,1], 3);
+
+
+		function funB(arg1){
+			var flag = true;
+
+			while(flag){
+				var reulst = funB(1);
+				var obj = {};
+			}		
+				
+			return arg1 + 1;
+		}
+
+		funB(1)
+	</script>
+</body>
+</html>

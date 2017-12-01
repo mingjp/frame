@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="../../../../libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <script src="../vue.js"></script>
+        <script src="../jquery-2.1.1.min.js"></script>
+        <script src="./dictionary.js"></script>
+    </head>
+    <body>
+        <template id="datagrid">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th v-for="(value, key) in dataset[0]" v-if="columns.indexOf(key) > -1">{{dictionary[lan][key] || key}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(object, index) in dataset">
+                        <td v-for="(value, key) in object" v-if="columns.indexOf(key) > -1">{{value}}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th></th>
+                    </tr>
+                </tfoot>
+            </table>
+        </template>
+
+        <div id="app"  class="bs-example">
+            <datagrid api="http://localhost/course/api/api/student/FetchAllStudent" cols="indexid,account,phone,projectname"></datagrid>
+        </div>
+
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    dataset: []
+                },
+                components: {
+                    datagrid: {
+                        template: '#datagrid',
+                        props: ['api', 'cols'],
+                        data: function(){
+                            return {
+                                dataset: [],
+                                columns: [],
+                                dictionary: dictionary,
+                                lan: 'en'
+                            }
+                        },
+                        created: function(){
+                            this.columns = this.cols.split(',');
+                            $.get(this.api, function(response){
+                                console.log(response)
+                                this.dataset = response.data;
+                            }.bind(this));
+                        }                      
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

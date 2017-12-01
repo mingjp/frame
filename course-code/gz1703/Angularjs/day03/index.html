@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="../../../../libs/angular/angular.min.js"></script>
+        <script src="./angular.global.js"></script>
+
+        <link href="../../../../libs/bootstrap/css/bootstrap.min.css">
+    </head>
+    <body ng-app="myApp" ng-controller="myController">
+        <datagrid api="student/FetchAllStudent"></datagrid>
+
+        <script>
+            var app = angular.module('myApp', ['globalApp']);
+
+            app.controller('myController', ['$scope', '$http', 'serverService', function($scope, $http, serverFactory){
+            }])
+        </script>
+    </body>
+</html>

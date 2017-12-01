@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+</head>
+<body>
+    <canvas id="canvas" style="border:solid 2px #ccc; margin:auto; display:block;"></canvas>
+    <script type="text/javascript">
+        var canvans = document.getElementById('canvas');
+
+        canvans.width = 1024;
+        canvans.height = 500;
+
+        var cxt = canvans.getContext('2d');
+		//将原点设置100,100位置
+		// cxt.translate(100,100);
+		//原点在100,100，则圆心设为0,0 ——> 100,100的位置
+		cxt.arc(0,0,100,0,60*Math.PI/180, false);
+		//以圆弧终点为起点画直线
+		// cxt.lineTo(0,0);
+		// cxt.rotate(30*Math.PI/180);
+		//以0,0为起点画直线
+		// cxt.lineTo(100,0);
+		cxt.stroke();
+
+    </script>
+</body>
+</html>

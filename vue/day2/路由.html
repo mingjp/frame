@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="../../lib/vue.js" type="text/javascript"></script>
+    <script src="../../lib/vue-router.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="app">
+        <p>
+            <router-link to='/foo'>Foo</router-link>
+            <router-link to='/bar'>Bar</router-link>
+        </p>
+        <router-view></router-view>
+    </div>
+    <script type="text/javascript">
+
+        // 定义 component
+        const Foo = {template:'<div><h1>Foo{{$route.params.id}}</h1></div>'};
+        const Bar = {template:'<div><h1>Bar</h1></div>'};
+
+        // 定义路由规则
+        const routers = [
+            {path:'/foo/:id',component:Foo},
+            {path:'/bar',component:Bar}
+        ]
+        // 创建 router 实例，然后传 `routes` 配置
+        const router = new VueRouter({
+            routes:routers,
+        })
+
+        const vm = new Vue({
+            el:'#app',
+            router
+        })
+    </script>
+</body>
+</html>

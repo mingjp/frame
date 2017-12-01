@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+		</style>
+	</head>
+	<body>
+		<input type="text" name="text" id="text" value="" />
+		<canvas id="canvas" width="80" height="40"></canvas>	
+		<input type="button" name="change" id="change" value="换一张" />
+	</body>
+	<script type="text/javascript">
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+		createText(ctx);
+		var change = document.getElementById("change");
+		change.onclick = function(){
+			createText(ctx);
+		}
+		
+		
+		function createText(ctx){
+			with(ctx){
+				fillStyle = "#fff";	
+				clearRect(0,0,80,40);
+				var text = getRandom();
+				font = "italic bold 30px microsoft yahei";
+				textBaseline = "top";
+				var lg = createLinearGradient(0,0,60,0);
+				lg.addColorStop(0,"pink");
+				lg.addColorStop(0.2,"yellow");
+				lg.addColorStop(0.4,"skyblue");
+				lg.addColorStop(0.6,"plum");
+				lg.addColorStop(0.8,"orange");
+				lg.addColorStop(1,"gold");
+				
+				strokeStyle = lg;
+				
+				strokeText(text,5,5);
+				/*var length=measureText(text);
+				strokeText("文本长"+length.width+"px",50,150);*/
+			}
+		}
+		
+		
+		
+		function getRandom(){
+			var num = Math.floor(Math.random()*8999+1000);
+			return num;
+		}
+	</script>

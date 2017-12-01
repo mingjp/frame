@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="transition.css">
+
+	<script type="text/javascript" src="../../../../libs/react-15.3.1/react-with-addons.js"></script>
+	<script type="text/javascript" src="../../../../libs/react-15.3.1/react-dom.js"></script>
+	<script type="text/javascript" src="../../../../libs/react-15.3.1/browser.min.js"></script>
+</head>
+<body>
+	<div id="container"></div>
+	<script type="text/babel">
+      //react 动画组件
+      var TransitionComponent = React.addons.CSSTransitionGroup;
+      var INTERVAL = 5000;
+
+      var AnimateDemo = React.createClass({
+        getInitialState: function() {
+          return {current: 0};
+        },
+
+        componentDidMount: function() {
+          this.interval = setInterval(this.tick, INTERVAL);
+        },
+
+        componentWillUnmount: function() {
+          clearInterval(this.interval);
+        },
+
+        tick: function() {
+          this.setState({current: this.state.current + 1});
+        },
+
+        render: function() {
+          var children = [];
+          var pos = 0;
+          var colors = ['red', 'gray', 'blue'];
+          for (var i = this.state.current; i < this.state.current + colors.length; i++) {
+            var style = {
+              left: pos * 128,
+              background: colors[i % colors.length]
+            };
+            pos++;
+            children.push(<div key={i} className="animateItem" style={style}>{i}</div>);
+          }
+          return (
+            <TransitionComponent className="animateExample" transitionName="example">
+              {children}
+            </TransitionComponent>
+          );
+          
+        }
+      });
+
+      ReactDOM.render(
+        <AnimateDemo />,
+        document.getElementById('container')
+      );
+	</script>
+</body>
+</html>

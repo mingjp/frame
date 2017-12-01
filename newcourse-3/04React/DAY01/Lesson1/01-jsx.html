@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<!-- React 的核心库 -->
+	<script type="text/javascript" src="../../../../lib/react/react.js"></script>
+	<!-- 提供与 DOM 相关的功能 -->
+	<script type="text/javascript" src="../../../../lib/react/react-dom.js"></script>
+	<!-- 将 JSX 语法转为 JavaScript 语法 -->
+	<script type="text/javascript" src="../../../../lib/react/browser.min.js"></script>
+
+</head>
+<body>
+	<div id='div1'></div>
+	<div id="div2"></div>
+	<div id="div3"></div>
+	<div id="div4"></div>
+	<div id="div5"></div>
+
+	<script type="text/babel">
+		//组件：Component
+		// var str = '<h1>Div1：Tom</h1>';
+		// document.getElementById('div1').innerHTML = str;
+		// jsx 的语法即可以有 js 的语法也可以有 html 的标签
+		//div1
+		var obj = {fontSize: '10px', color: 'red'};
+		ReactDOM.render(<h1 style={obj}>Div1：Tom</h1>, document.getElementById('div1'));
+
+		//div2
+		//{}里面写的是 js 语法块
+		var name = 'Tom';
+		ReactDOM.render(<h1>Div2：{name}</h1>, document.getElementById('div2'));
+
+		//div3
+		var obj = {name: 'Tom'};
+		ReactDOM.render(<h1>Div3：{obj.name}</h1>, document.getElementById('div3'));
+
+		//div4
+		//只有一个根节点
+		var array = ['React', 'JSX'];
+		ReactDOM.render(
+			<div>{
+					array.map(function(index, elem) {
+							console.log(index, elem)
+							return <h1 key={index}>Div4：{index}</h1>;
+						})
+				}
+				<ul>
+					<li>Lily</li>
+				</ul>
+			</div>, 
+			document.getElementById('div4')
+		);
+
+		//div5
+		//只有一个根节点
+		var arrayDom = [<h1 key="1">Tom</h1>, <h1 key="2">Sam</h1>];
+		ReactDOM.render(
+			<div>{arrayDom}</div>, 
+			document.getElementById('div5')
+		);		
+	</script>
+</body>
+</html>

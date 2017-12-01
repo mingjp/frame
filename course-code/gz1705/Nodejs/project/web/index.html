@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="../../../../../libs/jquery/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+	<input type="button" id="btnPrint" value="Print"/>
+	<script type="text/javascript">
+		$(function(){
+			$('#btnPrint').click(function(){
+				$.post("http://10.3.131.33:81/print", {text: "DK 超市收银系统  \n*************************************\n商品名称：香烟\n单品金额：100 元 \n商品数量：10 条\n总金额：1000 元\n买单时间：2017-08-15 10:53:19\n*************************************\n"}, function(res){
+					console.log(res)
+				})
+			})
+		})
+
+		// var token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRrIiwiaWF0IjoxNTA4MjQzNzIwLCJleHAiOjE1MDgyNDUxNjB9.0OLIV0Xzu9TF-4vHRsHFbWFPkR46-7HcnlpKnjZxxMg'
+		// $.get('http://localhost:88/login', function(response){
+		// 	console.log(response);
+		// 	// document.cookie = "token="
+		// })
+
+	/*	$.post("http://localhost:88/test1", {token: token}, function(res){
+			console.log(res);
+		})*/
+
+		// $.ajax({
+		// 	type: 'POST',
+		// 	url: 'http://localhost:88/auth',
+		// 	data: {name: "dk"},
+		// 	success: function(response){
+		// 		console.log(response);
+		// 	}
+		// })
+
+		// $.ajax({
+		// 	type: 'POST',
+		// 	url: 'http://localhost:88/test1',
+		// 	// data: {name: "dk"},
+		// 	headers: {'Authorization': token},
+		// 	success: function(response){
+		// 		console.log(response);
+		// 	}
+		// })
+	</script>
+</body>
+</html>

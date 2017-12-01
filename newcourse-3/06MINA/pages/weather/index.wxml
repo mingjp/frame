@@ -1,0 +1,110 @@
+<view class="swiper-tab">  
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">北京</view>  
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">上海</view>  
+    <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">广州</view>  
+    <view class="swiper-tab-list {{currentTab==3 ? 'on' : ''}}" data-current="3" bindtap="swichNav">深圳</view>  
+</view>  
+
+<loading hidden="{{loadingHidden}}"></loading>
+
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange">  
+    <swiper-item style="overflow: hidden;">  
+      <view class="content">
+        <view class="weather-current">
+          <view class="weather-item">
+            <view><image src="../../images/{{weatherData.forecast[0].type}}.png" mode="aspectFit"></image></view>
+            <view>{{weatherData.forecast[0].date}}</view>
+            <view>{{weatherData.wendu}}°C</view>
+            <view>{{weatherData.forecast[0].high}}/{{weatherData.forecast[0].low}}</view>
+            <view>{{weatherData.forecast[0].type}}</view>
+            <view>{{weatherData.forecast[0].fengli}}</view>
+          </view>
+        </view>
+        <view class="weather-list">
+          <view class="weather-item" wx:for="{{weatherData.forecast}}" wx:key="index" wx:if="{{index > 0}}">
+            <view><image src="../../images/{{item.type}}.png" mode="aspectFit"></image></view>
+            <view>{{item.date}}</view>
+            <view>{{item.type}}</view>
+            <view>{{item.high}}/{{item.low}}</view>
+            <view>{{item.fengli}}</view>
+            <view>{{item.fengxiang}}</view>
+          </view>
+        </view>
+      </view>  
+    </swiper-item>  
+
+    <swiper-item style="overflow: hidden;">  
+      <view class="content">
+        <view class="weather-current">
+          <view class="weather-item">
+            <view><image src="../../images/{{weatherData.forecast[0].type}}.png" mode="aspectFit"></image></view>
+            <view>{{weatherData.forecast[0].date}}</view>
+            <view>{{weatherData.wendu}}°C</view>
+            <view>{{weatherData.forecast[0].high}}/{{weatherData.forecast[0].low}}</view>
+            <view>{{weatherData.forecast[0].type}}</view>
+            <view>{{weatherData.forecast[0].fengli}}</view>
+          </view>
+        </view>
+        <view class="weather-list">
+          <view class="weather-item" wx:for="{{weatherData.forecast}}" wx:key="index" wx:if="{{index > 0}}">
+            <view><image src="../../images/{{item.type}}.png" mode="aspectFit"></image></view>
+            <view>{{item.date}}</view>
+            <view>{{item.type}}</view>
+            <view>{{item.high}}/{{item.low}}</view>
+            <view>{{item.fengli}}</view>
+            <view>{{item.fengxiang}}</view>
+          </view>
+        </view>
+      </view>  
+    </swiper-item>  
+
+    <swiper-item style="overflow: hidden;">  
+      <view class="content">
+        <view class="weather-current">
+          <view class="weather-item">
+            <view><image src="../../images/{{weatherData.forecast[0].type}}.png" mode="aspectFit"></image></view>
+            <view>{{weatherData.forecast[0].date}}</view>
+            <view>{{weatherData.wendu}}°C</view>
+            <view>{{weatherData.forecast[0].high}}/{{weatherData.forecast[0].low}}</view>
+            <view>{{weatherData.forecast[0].type}}</view>
+            <view>{{weatherData.forecast[0].fengli}}</view>
+          </view>
+        </view>
+        <view class="weather-list">
+          <view class="weather-item" wx:for="{{weatherData.forecast}}" wx:key="index" wx:if="{{index > 0}}">
+            <view><image src="../../images/{{item.type}}.png" mode="aspectFit"></image></view>
+            <view>{{item.date}}</view>
+            <view>{{item.type}}</view>
+            <view>{{item.high}}/{{item.low}}</view>
+            <view>{{item.fengli}}</view>
+            <view>{{item.fengxiang}}</view>
+          </view>
+        </view>
+      </view>  
+    </swiper-item>  
+
+    <swiper-item style="overflow: hidden;">  
+      <view class="content">
+        <view class="weather-current">
+          <view class="weather-item">
+            <view><image src="../../images/{{weatherData.forecast[0].type}}.png" mode="aspectFit"></image></view>
+            <view>{{weatherData.forecast[0].date}}</view>
+            <view>{{weatherData.wendu + "°C"}}</view>
+            <view>{{weatherData.forecast[0].high}}/{{weatherData.forecast[0].low}}</view>
+            <view>{{weatherData.forecast[0].type}}</view>
+            <view>{{weatherData.forecast[0].fengli}}</view>
+          </view>
+        </view>
+        <view class="weather-list">
+          <view class="weather-item" wx:for="{{weatherData.forecast}}" wx:key="index" wx:if="{{index > 0}}">
+            <view><image src="../../images/{{item.type}}.png" mode="aspectFit"></image></view>
+            <view>{{item.date}}</view>
+            <view>{{item.type}}</view>
+            <view>{{item.high}}/{{item.low}}</view>
+            <view>{{item.fengli}}</view>
+            <view>{{item.fengxiang}}</view>
+          </view>
+        </view>
+      </view>  
+    </swiper-item>              
+</swiper>  

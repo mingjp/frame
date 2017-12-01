@@ -1,0 +1,21 @@
+﻿CACHE MANIFEST  
+  
+#VERSION 1.1  
+#以 .manifest 为后辍的文件为应用程序缓存的配置文件
+  
+CACHE:  
+ApplicationCache.html  
+img/z.jpg 
+js/jquery-2.1.0.js
+  
+NETWORK:  
+img/y.jpg
+  
+FAILBACK:  
+./proxy/ proxy.html 
+
+#CACHE MANIFEST：文件标识
+#VERSION 1.0 ：版本号，只是一行注释，但改变可以更新缓存
+#CACHE：表示要缓存的文件
+#NETWORK：表示需要连接服务器的文件
+#FAILBACK：表示当没有响应时的替代方案

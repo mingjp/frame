@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<canvas id="myCanvas" width="600" height="300" style="border: solid 2px #ccc;"></canvas>
+
+	<script type="text/javascript">
+		var myCanvas = document.getElementById('myCanvas');
+		//通过 canvas 对象的 getContext 方法获取到 canvas 的 context 对象
+		var context = myCanvas.getContext('2d');
+
+		//路径开始
+		context.beginPath();
+
+		context.strokeStyle = 'red';
+
+		context.lineWidth = 5;
+		//起点
+		context.moveTo(50, 50);
+		//终点
+		context.lineTo(100, 100);
+
+		context.lineTo(150, 50);
+
+		context.lineTo(100, 0);
+
+		context.lineTo(50, 50);
+		//开始绘制
+		context.stroke();
+		//结束
+		context.closePath();
+		
+		context.beginPath();
+		// context.moveTo(50, 50);
+		context.lineTo(50, 0);
+		context.stroke();
+		context.closePath();
+
+		context.strokeStyle = '#ccc';
+		context.lineWidth = 10;
+		context.fillStyle = '#eee';
+		context.fillRect(300, 100, 50, 50 );
+	</script>
+</body>
+</html>

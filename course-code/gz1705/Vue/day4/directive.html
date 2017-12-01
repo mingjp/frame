@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="../../../../libs/vue/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<input type="text" name="" v-datepicker>
+	</div>
+
+	<script type="text/javascript">
+		Vue.directive('dk', function(element, binding, vnode){
+			// binding.value.color
+			// vnode.data.attrs
+			console.log(arguments);
+		});
+
+		// Vue.directive('dk', {
+		// 	inserted: function(element){
+
+		// 	},
+		// 	bind: function(){
+
+		// 	}
+		// })
+
+
+		var vm = new Vue({
+			el: '#app'
+		})
+	</script>
+</body>
+</html>

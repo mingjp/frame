@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script src="js/mui.min.js"></script>
+	</head>
+
+	<body>
+		<ul class="mui-table-view">
+		    <li class="mui-table-view-cell">
+		        <a class="mui-navigate-right" id="camera">摄像头</a>
+		    </li>
+		    <li class="mui-table-view-cell" id="barcode">
+		        <a class="mui-navigate-right">扫描二维码</a>
+		    </li>
+		    <li class="mui-table-view-cell" id="yyy">
+		        <a class="mui-navigate-right">摇一摇</a>
+		    </li>
+		    <li class="mui-table-view-cell" id="payment">
+		        <a class="mui-navigate-right">支付</a>
+		    </li>		    
+		</ul>
+		
+		<script type="text/javascript">
+
+				mui('.mui-table-view').on('tap', '#camera', function(){
+					mui.openWindow({
+						url: 'camera.html',
+						id: 'camera.html'
+					})
+				});	
+				mui('.mui-table-view').on('tap', '#barcode', function(){
+					mui.openWindow({
+						url: 'barcode.html',
+						id: 'barcode.html'
+					})
+				});		
+				mui('.mui-table-view').on('tap', '#yyy', function(){
+					mui.openWindow({
+						url: 'yyy.html',
+						id: 'yyy.html'
+					})
+				});
+				mui('.mui-table-view').on('tap', '#payment', function(){
+					mui.openWindow({
+						url: 'payment.html',
+						id: 'payment.html'
+					})
+				});						
+		</script>
+	</body>
+
+</html>

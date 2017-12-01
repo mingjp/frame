@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="../../../../libs/react/react.js"></script>
+	<script type="text/javascript" src="../../../../libs/react/react-dom.js"></script>
+	<script type="text/javascript" src="../../../../libs/react/browser.min.js"></script>
+</head>
+<body>
+	<div id="app1"></div>
+	<div id="app2"></div>
+	state: {name: '111'}
+	<div>
+		<ul>
+			<li>
+				<div>
+					<ul>
+						<li><h1>111</h1></li>
+						<li><h1>111</h1></li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+		<ul>
+			<li><h1>111</h1></li>
+			<li><h1>111</h1></li>
+		</ul>
+	</div>
+
+	state: {name: '222'}
+
+	<script type="text/babel">
+		var Component = React.createClass({
+			getDefaultProps: function(){
+				return {
+					api: 'api'
+				}
+			},
+			propTypes: {
+				api: React.PropTypes.string.isRequired
+			},
+			render: function(){
+				console.log(this.props);
+				return (<h1>{this.props.api}</h1>);
+			}
+		})
+
+		var api = "http://localhost:88/students";
+		ReactDOM.render(
+			<Component api={api}>
+				<h1>Tom</h1>
+			</Component>, 
+		document.getElementById('app1'));
+
+
+		var Component2 = React.createClass({
+			getDefaultProps: function(){
+				return {name: 'Lucy'}
+			},
+			getInitialState: function(){
+				return {age: 18};
+			},
+			aa: function(){
+				console.log(this);
+				this.refs.username.value = "123";
+			},
+			render: function(){
+				console.log(this);
+				// this.props.name = "Lucy";
+				this.state.age = 30
+				return (
+					<div>
+						<h3>{this.props.name}</h3>
+						<input type="text" name="" ref="username"/>
+						<input type="button" value="focus" onClick={this.aa} />
+					</div>
+				)
+			}
+		})
+
+		ReactDOM.render(<Component2 name="DK"/>, document.getElementById('app2'));
+	</script>
+</body>
+</html>

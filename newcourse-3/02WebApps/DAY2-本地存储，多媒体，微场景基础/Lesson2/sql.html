@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>客户信息管理网页</title>
+	</head>
+	<body>
+		<fieldset id="">
+			<legend>客户信息管理网页</legend>
+			
+			<table border="" cellspacing="" cellpadding="">
+				<tr><td>姓名</td><td><input type="text" name="name" id="name" value="" /></td></tr>
+				<tr><td>邮箱</td><td><input type="email" name="email" id="email" value="" required=""/></td></tr>
+				<tr><td>电话</td><td><input type="text" name="tel" id="tel" value="" /></td></tr>
+				<tr><td>备注</td><td><input type="text" name="more" id="more" value="" /></td></tr>
+				<tr>
+					<td colspan="2"><input type="button" name="btn" id="btn" value="保存" onclick="saveData()" /></td>
+				</tr>
+			</table>
+			<hr><br>
+			根据姓名检索信息：
+			<input type="text" name="namequeryName" id="namequeryName" value="" />
+			<input type="button" name="queryBtn" id="queryBtn" value="检索" onclick="findName()"/>
+			<hr><br>
+			<p id="msg"></p>
+		</fieldset>
+	</body>
+	<script type="text/javascript">
+		function saveData(){
+			var data = new Object;
+			data.name = document.getElementById("name").value;
+			data.email = document.getElementById("email").value;
+			data.tel = document.getElementById("tel").value;
+			data.more = document.getElementById("more").value;
+			var str = JSON.stringify(data);
+			localStorage.setItem(data.name,str);
+		}
+		
+		function findName(){
+			var oName = document.getElementById("namequeryName").value;
+			var str = localStorage.getItem(oName);
+			var data = JSON.parse(str);
+			var result = "姓名："+data.name+"<br>";
+			result+="邮箱："+data.email+"<br>";
+			result+="电话："+data.tel+"<br>";
+			result+="备注："+data.more+"<br>";
+			
+			
+			document.getElementById("msg").innerHTML = result;
+		}
+	</script>
+</html>

@@ -1,0 +1,16 @@
+.dkChart{width: 600px; height: 400px; margin: auto; position: relative; border-left: solid 1px #ccc; border-bottom: solid 1px #ccc;}
+.dkChart>ul{margin: 0; padding: 0; width: 100%;}
+.dkChart>ul>li{list-style: none; position: absolute;}
+
+/*y 轴
+.dkChart>ul.chartY{width: 48px; height: 100%; position: absolute; left: -30px;}
+.dkChart>ul.chartY>li{width: 58px; height: 40px; line-height: 40px;}
+
+ 轴
+.dkChart>ul.chartX{height: 30px; position: absolute; bottom: -30px;}
+.dkChart>ul.chartX>li{float: left; width: 48px; text-align: center;}
+
+/*柱子
+.dkChart>ul{height: 100%; width: 100%; position: relative;}
+.dkChart>ul>li{float: left; width: 20px; margin: 0 14px; text-align: center; height: 50%; background-color: #ccc; position: absolute; bottom: 0;}
+*/

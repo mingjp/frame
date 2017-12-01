@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="stylesheet" type="text/css" href="../../../../libs/bootstrap/css/bootstrap.min.css">
+
+	<script type="text/javascript" src="../../../../libs/vue/vue.min.js"></script>
+	<script type="text/javascript" src="../../../../libs/jquery/jquery-2.1.1.min.js"></script>	
+</head>
+<body>
+	<template id="datagrid">
+		<div class="bs-example" data-example-id="simple-table">
+			<h1>{{api}}</h1>
+			<!--搜索框-->
+			<div :style="{border: '#ccc solid 1px', height: '48px', padding: '10px 0', background: '#ccc'}">
+				<div class="col-sm-3"><label>username：<input type="text" v-model="username"></label></div>
+				<div class="col-sm-3"><label>phone：<input type="text" v-model="phone"></label></div>
+				<div class="col-sm-3"><label>mail：<input type="text" v-model="mail"></label></div>
+				<div class="col-sm-3"><input type="button" class="btn btn-info" value="搜索" @click="search"></div>
+			</div>	
+	    	<table class="table">
+		      	<thead>
+			        <tr>
+						<th v-for="(value, key) in dataset[0]" v-if="columns.indexOf(key) > -1">{{key}}</th>
+			        </tr>
+		      	</thead>
+				<tbody>
+					<tr v-for="obj in dataset">
+						<td v-for="(value, key) in obj"  v-if="columns.indexOf(key) > -1">{{value}}</td>
+					</tr>
+				</tbody>
+	    	</table>
+	  	</div>		
+	</template>
+
+	<!--a.html-->
+	<div id="app">
+		<datagrid :columns="columns" api="http://localhost/course/api/api/student/FetchAllStudent" />
+	</div>
+
+	<script type="text/javascript">
+		Vue.component('datagrid', {
+			template: '#datagrid',
+			props: ['api', 'columns'],
+			data: function(){
+				return {
+					datasetOrigin: [],
+					dataset: [],
+					username: '',
+					phone: '',
+					mail: ''
+				}
+			},
+			methods: {
+				search: function(){
+					// this.$emit('dk')
+				}
+			},
+			created: function(){
+				// console.log('component created')
+				console.log(this.columns)
+		  		$.get(this.api, function(response){
+		  			this.dataset = response.data;
+		  			this.datasetOrigin = response.data;
+			  	}.bind(this))	
+			}
+		})
+
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				columns: ['account', 'phone']
+			}		
+		})	
+	
+	</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<script type="text/javascript" src="../../../../libs/vue/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<p>{{mess}}</p>
+		<input type="text" v-model="name">
+		<p>{{age}}</p>
+		<input type="text" v-model="age">
+	</div>
+
+	<script type="text/javascript">
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				name: '1701',
+				mess: '',
+				mess2: ''				
+			},
+			computed: {
+				age: {
+					get: function(){
+						console.log("age's getter")
+						return this.name;
+					},
+					set: function(val){
+						console.log("age's setter");
+						this.name = val;
+					}
+				}
+			},
+			watch: {
+				name: function(n, o){
+					this.mess = `new value ${n}, old value ${o}`;
+				}
+			}
+		})
+	</script>
+</body>
+</html>

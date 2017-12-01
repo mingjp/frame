@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>css过渡</title>
+    <script src="../../lib/jquery-3.1.1.js" type="text/javascript"></script>
+    <script src="../../lib/vue.js" type="text/javascript"></script>
+    <style type="text/css">
+        .a-enter{opacity:0;}
+        .a-enter-active{transition:all 5s;}
+        .a-leave-active{transition:all 5s;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <input type="button" :value="show ? 'hide' :'show'" @click="show = !show" />
+        <transition name="a">
+            <img src="../img/green.jpg" height="247" width="106" alt="" v-show="show"/>
+        </transition>
+    </div>
+    <script type="text/javascript">
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            show:true,
+        }
+    })
+    </script>
+</body>
+</html>

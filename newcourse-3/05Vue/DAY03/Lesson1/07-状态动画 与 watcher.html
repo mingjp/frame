@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<script type="text/javascript" src="../../../../libs/vue/vue.js"></script>
+	<script type="text/javascript" src="../../../../libs/vue/tween.js"></script>
+</head>
+<body>
+	<div id="app">
+		<input v-model.number="number" type="number" step="20">
+		<p>{{animatedNumber}}</p>
+	</div>
+
+	<script type="text/javascript">
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				number: 0,
+				animatedNumber: 0,
+				animateTimer: null
+			},
+			watch: {
+				number: function(newVal, oldVal){
+					function animate(){
+						requestAnimationFrame(animate);
+						TWEEN.update();
+					}
+					new TWEEN.Tween({tweeningNumber: oldVal})
+					.easing(TWEEN.Easing.Quadratic.Out)
+					.to({ tweeningNumber: newVal }, 500)
+					.onUpdate(function () {
+					  	vm.animatedNumber = this.tweeningNumber.toFixed(0)
+					}).start()
+					animate()					
+				},
+				number1: function(newVal, oldVal){
+					function animate(){
+						if(vm.animatedNumber == newVal){
+							window.clearInterval(vm.animateTimer);
+							vm.animateTimer = null;
+							return;
+						}
+						if(vm.animatedNumber < newVal){
+							vm.animatedNumber += 1;
+						}else{
+							vm.animatedNumber -= 1;
+						}
+					}
+					if(this.animateTimer){
+						window.clearInterval(this.animateTimer);
+						this.animateTimer = null;
+					}
+					this.animateTimer = window.setInterval(animate, 2);
+				}
+			}
+		})
+	</script>
+</body>
+</html>

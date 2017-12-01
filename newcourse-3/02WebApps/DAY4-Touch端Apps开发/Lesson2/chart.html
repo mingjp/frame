@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="dk.chart.css">
+	<script type="text/javascript" src="dk.chart.js"></script>
+	<script type="text/javascript" src="socket.io.min.js"></script>
+</head>
+<body>
+	<div id="container"></div>
+
+	<script type="text/javascript">
+		var chart = new DKChart('container');
+
+		var socket = io.connect('ws://localhost:88');
+
+		socket.emit('serverMessage', JSON.stringify({count: 12, max: 200}));
+
+		socket.on('clientMessage', function(_args){
+			var obj = JSON.parse(_args);
+			chart.update(obj);
+		})
+	</script>
+</body>
+</html>

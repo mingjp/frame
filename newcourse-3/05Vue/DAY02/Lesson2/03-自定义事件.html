@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<script type="text/javascript" src="../../../../libs/vue/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<p>{{ total }}</p>
+		<button-counter v-on:dk="incrementTotal"></button-counter>
+		<button-counter v-on:dk="incrementTotal"></button-counter>
+
+		<input type="button" :value="dkcount" @click="dkcounter1(1,2, $event)">
+	</div>
+
+	<script type="text/javascript">
+		//全局组件
+		Vue.component('button-counter', {
+			template: '<button v-on:click="increment">{{ counter }}</button>',
+			data: function(){
+				return {
+					counter: 0
+				};
+			},
+			methods: {
+				increment: function(){
+					console.log(this);
+					this.counter +=1;
+					this.$emit('dk');
+					// this.$on('dk', function(){
+					// 	console.log('dk');
+					// });
+					// this.$emit('dk');
+				}
+			}
+		});
+
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				total: 0,
+				dkcount: 10
+			},
+			methods: {
+				incrementTotal: function(){
+					this.total += 1;
+				},
+				dkcounter1: function(n1, n2, event){
+					this.$emit('dkcounter2');
+					// this.dkcount += 1;
+				}
+			}
+		})
+		vm.$on('dkcounter2', function(){
+			console.log(this);
+			this.dkcount += 1;
+		})
+
+	</script>
+</body>
+</html>

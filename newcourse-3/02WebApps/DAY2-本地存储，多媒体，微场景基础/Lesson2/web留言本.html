@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>web留言本</title>
+		<style type="text/css">
+			*{
+				font-size: 24px;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<fieldset id="">
+			<legend>web留言本</legend>
+			<textarea name="info" rows="5" cols="100" id="info"></textarea>
+			<span id="tip"></span>
+			<br><br>
+			<input type="button" name="add" id="add" value="添加" onclick="addInfo()"/>
+			<input type="button" name="query" id="query" value="查询" onclick = "loadInfo()"/>
+			<input type="button" name="clear" id="clear" value="初始化" onclick="reStart()"/>
+			<p id="msg"></p>
+		</fieldset>
+	</body>
+	<script type="text/javascript">
+		function addInfo(){
+			var target = document.getElementById("info");
+			var tip = document.getElementById("tip");
+			var data = target.value;
+			var time = new Date().getTime();
+			localStorage.setItem(time,data);
+			alert("添加成功");
+			loadInfo();
+		}
+		
+		function reStart(){
+			localStorage.clear();
+			alert("没数据了");
+			loadInfo();
+		}
+		
+		function loadInfo(){
+			var table = "<table border = '1'>";
+			
+			var oLength = localStorage.length;
+			if(oLength == 0){
+				table +="没有数据了";
+			}else{
+				for(var i = 0; i< oLength;i++){
+				var key = localStorage.key(i);
+				var value = localStorage.getItem(key);
+				var date = new Date();
+				date.setTime(key);
+				var str = date.toGMTString();
+				table +="<tr><td>"+value+"</td><td>"+str+"</td></tr>"; 
+			}
+			}
+			
+			table+="</table>";
+			var target = document.getElementById("msg");
+			target.innerHTML=table;
+		}
+	</script>
+	
+</html>

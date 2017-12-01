@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<canvas id="canvas" width="400" height="300"></canvas>	
+	</body>
+	<script type="text/javascript">
+		var canvas = document.getElementById("canvas");
+        var context = canvas.getContext("2d");
+
+        context.fillStyle = "red";
+
+        context.save(); //保存了当前context的状态
+
+        context.fillStyle = "blue";
+
+        context.fillRect(0, 0, 100, 100);
+
+        context.restore();//恢复到刚刚保存的状态
+
+        context.fillRect(0,120,100,100);
+		
+	</script>
+</html>

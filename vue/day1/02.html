@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>练习</title>
+    <script src="../vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>{{massage}}</h1>
+        <img :src="img" alt="" />
+        <span v-show="show">show</span>
+        <div v-html="html"></div>
+        <form action="">
+            <input type="text" />
+        </form>
+        <table>
+            <thead>
+                <tr>
+                    <th v-for="(value,key) in dataset[0]">{{key}}</th>
+                </tr>
+                <tr v-for="(obj,index) in dataset">
+                    <td v-for="(value,index) in obj">{{value}}</td>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <script type="text/javascript">
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            massage:'vue练习',
+            img:'../img/1.jpg',
+            show:1 == 1,
+            html:'<h1>1234</h1>',
+            dataset:[{name:'mm',age:18},{name:'dk',age:30}]
+        }
+        
+    })
+    </script>
+</body>
+</html>

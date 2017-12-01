@@ -1,0 +1,41 @@
+{
+  "index.html": {
+    "resources": [
+      "js/mui.min.js",
+      "subpage1.html",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ],
+    "refer": [
+      "subpage1.html"
+    ]
+  },
+  "subpage1.html": {
+    "refer": [
+      "camera.html",
+      "barcode.html",
+      "yyy.html",
+      "payment.html"
+    ]
+  },
+  "camera.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ]
+  },
+  "barcode.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ]
+  },
+  "yyy.html": {
+    "resources": [
+      "js/jquery-2.1.0.js",
+      "js/yyy.js"
+    ]
+  }
+}

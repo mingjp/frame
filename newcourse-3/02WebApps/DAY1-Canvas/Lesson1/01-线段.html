@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+</head>
+<body>
+    <canvas id="canvas" style="border:solid 2px #ccc; margin:auto; display:block;"></canvas>
+    <div id="div">
+        
+    </div>
+    <script type="text/javascript">
+        var canvans = document.getElementById('canvas');
+
+        canvans.width = 1024;
+        canvans.height = 500;
+
+        var cxt = canvans.getContext('2d');
+
+        cxt.beginPath();
+        cxt.moveTo(100, 100);
+        cxt.lineTo(300, 300)
+        cxt.lineTo(100, 300);
+        cxt.lineTo(100, 100);
+        cxt.strokeStyle = 'red';
+        cxt.lineWidth = 2;
+        cxt.stroke();
+        cxt.closePath();
+
+        cxt.beginPath();
+        cxt.moveTo(200, 100);
+        cxt.lineTo(340, 200);
+        cxt.lineWidth = 5;
+        cxt.strokeStyle = 'green';
+        cxt.stroke();
+        cxt.closePath();
+
+    </script>
+</body>
+</html>

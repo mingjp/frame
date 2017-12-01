@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="../../../../libs/vue/vue.js"></script>
+    </head>
+    <body>
+        <div id="div1">
+            <h1>{{1+1}}</h1>
+        </div>
+
+        <div div="div2">
+            <h1>{{2+2}}</h1>
+            <p>{{name}}</p>
+            <p>{{age}}</p>
+        </div>
+        <script>
+            var  vm = new Vue({
+                el: '#div2',
+                data: {
+                    name: 'DK',
+                    age: 18,
+                    dataset: [{a: {}}]
+                },
+                mehtods: {}
+            })
+        </script>
+    </body>
+</html>

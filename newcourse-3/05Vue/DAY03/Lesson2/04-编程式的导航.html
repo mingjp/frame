@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<script type="text/javascript" src="../../DAY01/Lesson1/vue.js"></script>
+	<script type="text/javascript" src="../../../../gz1705/Vue/lib/vue-router.js"></script>
+	<!-- <script type="text/javascript" src="../../../../libs/vue/vue.js"></script>
+	<script type="text/javascript" src="../../../../libs/vue/vue-router.js"></script> -->
+</head>
+<body>
+	<div id="app">
+		<h1>Hello App</h1>
+		<p>
+			<router-link to="/" replace>主页</router-link>
+			<input type="button" name="" value="主页" @click="router.replace('/')">
+			<router-link to="/user/1" >用户1</router-link>
+			<input type="button" name="" value="用户1" @click="router.push('/user/1')">
+			<router-link to="/user/2/profile" >用户1</router-link>
+			<input type="button" name="" value="用户2" @click="router.push({path: '/user/2/profile'})">
+		</p>
+		<!-- 路由出口 -->
+		<!-- 路由匹配到的组件将渲染在这里 -->
+		<router-view></router-view>
+	</div>
+
+	<script type="text/javascript">
+		const User = {
+		  template: `
+		    <div class="user">
+		    	<p>
+		      		<h2>User {{ $route.params.id }}</h2>
+		      		<router-link :to="'/user/' + $route.params.id + '/profile'">用户1</router-link>
+		      	</p>
+		      	<router-view></router-view>
+		    </div>
+		  `
+		}
+
+		const UserProfile = {
+			template: '<h1>Tom</h1>'
+		};
+
+		var router = new VueRouter({
+		  	routes: [{
+		  		path: '/',
+		  		component: {
+		  			template: '<h1>Home</h1>'
+		  		}
+		  	},{
+		  		path: '/user/:id', 
+		  		component: User,
+		  		children: [{
+		  			// 当 /user/:id/profile 匹配成功，
+		  			// UserProfile 会被渲染在 User 的 <router-view> 中
+		  			path: 'profile',
+		  			component: UserProfile
+		  		}]
+		  	}],
+		})		
+
+		const app = new Vue({
+			el: '#app',
+		  	router,
+		  	data: {
+		  		router
+		  	}
+		})
+	</script>
+
+</body>
+</html>

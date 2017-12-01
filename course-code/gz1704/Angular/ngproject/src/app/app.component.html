@@ -1,0 +1,10 @@
+<!-- <h1>{{api}}</h1><h2>{{hero.name}} details!</h2>
+<input type="text" name="" id="" [(ngModel)]="hero.name">
+<input type="button" value="" (click)="onClick()"> -->
+<h1>app-{{dictionary.lanType}}</h1>
+<select #lanType [(ngModel)]="dictionary.lanType">
+    <option value="cn">cn</option>
+    <option value="en">en</option>
+  </select>
+  <button (click)="parentEvent()">Stop</button>
+<datagrid api="http://localhost:88/students" config="config1704/students.txt"></datagrid>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        var obj = {
+            state:true,
+            data:{
+                name:'Tom',
+                age:18
+            }
+        };
+        var str = "data.birthday.year = 2017";
+        function show(){
+            var res = str.split('=');
+            console.log(res);
+            var parm = res[0].split('.');
+            for(var i=0;i<parm.length;i++){
+                obj.data[parm[i][parm[i+1]]]
+            }
+            console.log(parm)
+            obj.data[res[0]] = res[1];
+            console.log(obj.data);
+        }
+        show();
+    </script>
+</body>
+</html>

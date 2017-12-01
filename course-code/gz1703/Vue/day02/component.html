@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="../vue.js"></script>
+    </head>
+    <body>
+        <template id="component4">
+            <div>
+                <p>{{count}}</p>
+                <input type="text" v-model="count" />
+            </div>
+        </template>
+
+        <div id="app">
+            <p>{{count}}</p>
+            <component1></component1>
+            <select>
+                <option is="option1"></option>
+            </select>
+            <component2 title="1703" :count="count"></component2>
+
+            <h3>{{total}}</h3>
+            <incrementtotal title="1703" v-on:count="incrementTotal"></incrementtotal>
+
+            <component3>
+                <h1>2</h1>
+                <h1>3</h1>
+            </component3>
+
+            <component4></component4>
+        </div>
+
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    count: 120,
+                    total: 0
+                },
+                methods: {
+                    incrementTotal: function(n){
+                        console.log(n)
+                        this.total += 1;
+                    }
+                },
+                components: {
+                    'component1': {
+                        template: '<input type="button" :value="count" @click="increment"/>',
+                        data: function(){
+                            return {
+                                count: 0
+                            }
+                        },
+                        methods: {
+                            increment: function(){
+                                console.log(this);
+                                this.count += 1;
+                            }
+                        }
+                    },
+                    'option1': {
+                        template: '<option value=1>男</option>'
+                    },
+                    'component2': {
+                        template: '<h1>{{title + count}}</h1>',
+                        props: ['title', 'count']
+                    },
+                    'incrementtotal': {
+                        template: '<input type="button" :value="total" @click="incrementTotal" />',
+                        props: ['title'],
+                        data: function(){
+                            return {
+                                total: 0
+                            }
+                        },
+                        methods: {
+                            incrementTotal: function(){
+                                this.total += 1;
+                                this.$emit('count', 1000);
+                            }
+                        }
+                    },
+                    'component3': {
+                        template: `
+                            <div>
+                                <slot></slot>
+                                <h1>1</h1>
+                            </div>
+                        `
+                    },
+                    'component4': {
+                        template: '#component4',
+                        data: function(){
+                            return {
+                                count: 2
+                            }
+                        }
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

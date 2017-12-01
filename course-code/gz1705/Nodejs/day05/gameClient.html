@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="../../../../libs/socket.io.min.js"></script>
+	<script type="text/javascript" src="../../../../libs/jquery/jquery-2.1.1.min.js"></script>
+	<style type="text/css" media="screen">
+		body{font-size: 12px; margin: 0; padding: 0;}
+		div.person{width: 50px; height: 50px; background-color: #ccc; transition: all 0.8s; position: absolute; left: 0px; top: 0px;}
+	</style>	
+</head>
+<body>
+	<div id="createPerson">
+		<input type="text" name="" id="nickname">
+		<input type="button" id="btnCreate" name="" value="创建角色">
+	</div>
+
+	<!-- <div class="person"></div> -->
+
+	<script type="text/javascript">
+		var person, socket = null;
+		$('#btnCreate').click(function(){
+			person = {
+				id: parseInt(Math.random() * 100000000),
+				nickname: $('#nickname').val(),
+				x: parseInt(Math.random() * 10),
+				y: parseInt(Math.random() * 10)
+			}
+
+			$('#createPerson').hide();
+
+			socket = io("ws://localhost:888");
+			socket.emit('ServerLogin', JSON.stringify(person));
+
+			socket.on('CreatePersons', function(_persons){
+				var personObj = JSON.parse(_persons);
+
+				console.log(personObj);
+				for(var key in personObj){
+					if(!$('#' + personObj[key].id)[0]){
+						$('<div></div>').addClass("person").attr('id', key).text(personObj[key].nickname).css({transform: "translate(" + personObj[key].x + "px, " + personObj[key].y + "px)"}).appendTo('body');
+					}
+				}
+			})
+
+			socket.on("ClientMove", function(_person){
+				var personObj = JSON.parse(_person);
+				$('#' + personObj.id).css({transform: "translate(" + personObj.x + "px, " + personObj.y + "px)"});
+				console.log(personObj);
+			})
+		})
+
+
+		$(document).click(function(event){
+			if(!socket){
+				return false;
+			}
+			person.x = event.clientX;
+			person.y = event.clientY;
+
+			socket.emit("ServerMove", JSON.stringify(person));
+			// $('.person').css({transform: "translate(" + x + "px, " + y + "px)"});
+		})
+	</script>
+</body>
+</html>

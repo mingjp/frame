@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<!--是 React 的核心库文件-->
+	<script type="text/javascript" src="../../../libs/react/react.js"></script>
+	<!--- 提供 DOM 相关的功能 -->
+	<script type="text/javascript" src="../../../libs/react/react-dom.js"></script>
+	<!--将 JSX 语法转换成标准的 JavaScript 语法 (脚手架)-->
+	<script type="text/javascript" src="../../../libs/react/browser.min.js"></script>
+</head>
+<body>
+	<div id="app" name="Tom"></div>
+	<div id="div1"></div>
+	<input type="text" name="" value="" placeholder="" id="input">
+
+	<script>
+		$('#input').change(function(event){
+			$(this).val($(event.target).val())
+		})
+
+		var name = {name: "app"};
+		var h1 = "<h1>React-" + name.name + "</h1>";
+
+
+		document.getElementById('app').innerHTML = h1;
+	</script>
+
+	<script type="text/babel">
+		//h2 不是标签，而是一个对象
+		var dom1 = <div><h1>React-Div1</h1></div><h1></h1></div>
+		// var input = <input type="text" name="" value="" placeholder="" />
+
+		//ReactDom 是 React 的一个核心对象，好比 jQuery($)
+		//render 是一个 ReactDOM 的一个核心方法
+		ReactDOM.render(dom1, document.getElementById('div1'));
+
+		// $.ajax({
+		// 	success: function(){}
+		// })
+
+		var Component1 = React.createClass({
+			getInitialState() {
+				return {
+					name: 'Sam'
+				}
+			}
+			getDefaultProps() {
+				return {
+					name: 'Tom'
+				}
+			}
+			render: function(){
+				return (
+					<div>
+						<h1>{this.state.name}</h1>
+					</div>
+				)
+			}
+		})
+
+		// $('#app').attr('name')
+		// $('#app').prop('name')
+		// 
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<script type="text/javascript" src="jquery-2.1.1.min.js"></script>
+</head>
+<body>
+	<input type="text" id="name" />
+	<input type="password" id="password" />
+	<input type="button" name="" value="注册" id="btn_reg">
+	<h1></h1>
+	<script type="text/javascript">
+		$('#btn_reg').click(function(){
+			$.post('http://localhost:888/register', {name: $('#name').val(), age: 18, password: $('#password').val()}, function(response){
+				console.log(response);
+				var obj = window.eval('(' + response + ')');
+				if(!obj.state){
+					$('h1').text(obj.message);
+				} else {
+					$('h1').text('注册成功');
+				}
+			})		
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="../../../../libs/react/react.js"></script>
+        <script src="../../../../libs/react/react-dom.js"></script>
+        <script src="../../../../libs/react/browser.min.js"></script>
+        <script src="../../../../libs/jquery/jquery-2.1.1.min.js"></script>
+    </head>
+    <body>
+        <div id="div1"></div>
+
+        <script type="text/babel">
+            //component => 组件
+            //Component name => 组件名：首字母大写
+            var Component1 = React.createClass({
+                render: function(){
+                    return <h1>Tom</h1>;
+                }
+            })
+
+            // ReactDOM.render(<h1>Sam</h1>, document.getElementById('div1'));
+            ReactDOM.render(<Component1 />, document.getElementById('div1'));
+
+            var Component2 = React.createClass({
+                render: function(){
+                    // console.log(this.props.children);
+                    return (
+                        <div>
+                            <h1>姓名：{this.props.name}</h1>
+                            <h1>年龄：{this.props.age}</h1>
+                        </div>
+                    );
+                }
+            })
+
+            ReactDOM.render(<Component2 name="Tom" age="18" obj="{name: 'Lucy'}" className=""/>, document.getElementById('div1'));
+
+            var Component3 = React.createClass({
+                render: function(){
+                    return (
+                        <div>
+                            <h1>姓名：{this.props.name}</h1>
+                            <h1>年龄：{this.props.age}</h1>                            
+                            {
+                                React.Children.map(this.props.children, function(childNode){
+                                    return <li>{childNode}</li>
+                                })
+                            }
+                        </div>
+                    );
+                }
+            })
+
+            ReactDOM.render(
+                <Component3 name="Tom" age="18">
+                    <span>Tom</span>
+                    <span>Sam</span>
+                </Component3>, document.getElementById('div1'));
+
+            var Component4 = React.createClass({
+                getDefaultProps: function(){
+                    return {
+                        name: 'Tom',
+                        age: "18"
+                    }
+                },
+                propTypes: {
+                    name: React.PropTypes.string.isRequired,
+                    age: React.PropTypes.string.isRequired,
+                    adress: React.PropTypes.string.isRequired
+                },
+                render: function(){
+                    return <h1>{this.props.name}</h1>;
+                }
+            })
+            ReactDOM.render(<Component4 name="Sam" adress="gz"/>, document.getElementById('div1'));
+
+            var Component5 = React.createClass({
+                focus: function(){
+                    this.refs.abc.focus();
+                },
+                change: function(){
+                    console.log(321);
+                },
+                render: function(){
+                    return (
+                        <div>
+                            <input type="text" value={this.props.name} onChange={this.change} ref="abc"/>
+                            <input type="button" value="获取焦点" onClick={this.focus} ref="cba"/>
+                        </div>
+                    )
+                }
+            })
+            ReactDOM.render(<Component5 name="Sam" adress="gz"/>, document.getElementById('div1'));
+
+            var Component6 = React.createClass({
+                getInitialState: function(){
+                    return {
+                        name: "Tom"
+                    }
+                },
+                getDefaultProps: function(){
+                    return {
+                        name: 'Sam'
+                    }
+                },
+                change: function(event){
+                    // this.refs.h1.innerText = event.target.value;
+                    this.setState({name: event.target.value});
+                },
+                render: function(){
+                    return (
+                        <div>
+                            <input type="text" onChange={this.change} value={this.state.name}/>
+                            <h1 ref="h1">{this.state.name}</h1>
+                        </div>                        
+                    )
+                }
+            })
+
+            ReactDOM.render(<Component6 />,  document.getElementById('div1'));
+
+            var DataGrid = React.createClass({
+                getInitialState: function(){
+                    return {
+                        dataset: [{name: "Tom", age: 18, height: 180}, {name: "Sam", age: 22, height: 220}]
+                    }
+                },
+                propTypes: {
+                    api: React.PropTypes.string.isRequired
+                },
+                componentWillMount: function(){
+                    if(this.props.api){
+                        $.get(this.props.api, function(response){
+                            console.log(response);
+                            this.setState({dataset: response.data});
+                        }.bind(this));
+                    }
+                },
+                render: function(){
+                    var thead = [];
+                    for(var key in this.state.dataset[0]){
+                        thead.push(<th key={"thead_tr_" + key}>{key}</th>)
+                    }
+                    
+                    var tbody = [];
+                    this.state.dataset.forEach(function(element, index) {
+                        var tds = [];
+                        for(var key in element){
+                            tds.push(<td key={'tbody_tr_td_' + key + '_' + index}>{element[key]}</td>)
+                        };
+                        tbody.push(<tr key={'tbody_tr' + key + '_' + index}>{tds}</tr>);
+                    }, this);
+
+                    return (
+                        <table>
+                            <thead>
+                                <tr>{thead}</tr>
+                            </thead>
+                            <tbody>
+                                 {tbody}  
+                            </tbody>
+                        </table> 
+                    )
+                }
+            }) 
+            
+            ReactDOM.render(<DataGrid api="http://localhost/course/api/api/student/FetchAllStudent"/>, document.getElementById('div1'));
+            ReactDOM.render(<DataGrid api="http://localhost/course/api/api/student/FetchAllStudent"/>, document.getElementById('div2'));
+        </script>
+    </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<script type="text/javascript" src="../../../../libs/jquery/jquery-2.1.1.min.js"></script>
+	<title>IP</title>
+</head>
+
+<body>	
+	 jsonp调用示例<br/>
+</body>
+<script>
+	function formatterDateTime() {
+		var date=new Date()
+		var month=date.getMonth() + 1
+		var datetime = date.getFullYear()
+            + ""// "年"
+            + (month >= 10 ? month : "0"+ month)
+            + ""// "月"
+            + (date.getDate() < 10 ? "0" + date.getDate() : date
+                    .getDate())
+            + ""
+            + (date.getHours() < 10 ? "0" + date.getHours() : date
+                    .getHours())
+            + ""
+            + (date.getMinutes() < 10 ? "0" + date.getMinutes() : date
+                    .getMinutes())
+            + ""
+            + (date.getSeconds() < 10 ? "0" + date.getSeconds() : date
+                    .getSeconds());
+		return datetime;
+	}
+	
+	$.ajax({
+	    type: 'post',
+	    url: 'http://route.showapi.com/632-1',
+	    dataType: 'jsonp',
+	    data: {
+	        "showapi_timestamp": formatterDateTime(), //注意要使用当前时间。服务器只处理时间误差10分钟以内的请求
+	        "showapi_appid": '26916', //这里需要改成自己的appid
+	        "showapi_sign": '72fa78be4c2045138d456456fb9a3a90'  //这里需要改成自己的密钥
+	    },
+	    jsonp: 'jsonpcallback',
+	    error: function(XmlHttpRequest, textStatus, errorThrown) {
+	        alert("操作失败!");
+	    },
+	    success: function(result) {
+	        console.log(result) //console变量在ie低版本下不能用
+	        alert("返回的图片地址为:"+result.showapi_res_body.img_path)
+	    }
+	});
+
+</script>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="../../../../../libs/vue/vue.js"></script>
+	<script type="text/javascript" src="../../../../../libs/jquery/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+	<div id="app">
+		<table>
+			<thead>
+				<th v-for="(value, key) in dataset[0]">{{key}}</th>
+			</thead>
+			<tbody>
+				<tr v-for="(obj, index) in dataset">
+					<td v-for="(value, key) in obj">{{value}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<script type="text/javascript">
+		//生命周期
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				dataset: []
+			},
+			beforeCreate: function(){
+				console.log('beforeCreate', $('th').length);//
+				var self = this;
+				$.get('http://localhost:88/products', function(response){
+					self.dataset = response.data;
+					console.log('ajax', response);
+				})
+			},
+			created: function(){
+				console.log('created', $('th').length);//
+			},
+			beforeMount: function(){
+				console.log('beforeMount', $('th').length);//
+			},
+			mounted: function(){
+				console.log('mounted', $('th').length);//
+			},
+			beforeUpdate: function(){
+				console.log('beforeUpdate', $('th').length);//
+			},
+			updated: function(){
+				console.log('updated', $('th').length);//	
+			}
+		})
+
+		window.onload = function(){}
+
+		$(function(){})
+	</script>
+</body>
+</html>

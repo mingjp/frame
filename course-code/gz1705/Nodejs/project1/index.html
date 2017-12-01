@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="libs/js/common.js"></script>
+	<script type="text/javascript" src="libs/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+	<form>
+<!-- 		<input type="file" name="aa"> -->
+		<input type="text" name="" id="username">
+		<input type="button" id="btnLogin" value="Login" />
+	</form>
+
+	<script type="text/javascript">
+		$(function(){
+			$('#btnLogin').click(function(){
+				$.post(common.baseUrl + '/login', {username: $("#username").val()}, function(response){
+					console.log(response);
+				})
+			})
+		})
+	</script>
+</body>
+</html>

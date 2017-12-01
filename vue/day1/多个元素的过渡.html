@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>多个元素过渡</title>
+    <script src="../../lib/vue.js" type="text/javascript"></script>
+    <style type="text/css" media="screen">
+        .fade-enter{opacity: 0;}
+        .fade-enter-active{transition: all .5s;}
+
+        .fade-leave-active{opacity: 0; transition: all .5s;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <input type="button"  :value=" red ? 'red' : 'yellow'" @click="red = !red"/>
+            <transition name="fade" mode="in-out">
+                <img src="../img/red.jpg" height="247" width="106" v-if="red" key="red" />
+                <img src="../img/yellow.jpg" height="247" width="106" v-else key="yellow" />
+            </transition>
+        </div>
+        <div>
+            <input type="button"  :value="flag == 1 ?'green' : flag == 2 ? 'red':'yellow'" @click="flag = flag ==1 ? 2 : flag == 2 ? 3 : 1"/>
+            <transition name="fade" mode="out-in">
+                <img src="../img/red.jpg" height="247" width="106" v-if="flag==1" key="red" />
+                <img src="../img/yellow.jpg" height="247" width="106" v-else-if='flag==2'  key="green" />
+                <img src="../img/green.jpg" height="247" width="106" alt="" v-else key="yellow" />
+            </transition>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                red:true,
+                flag:1
+            }
+        })
+    </script>
+</body>
+</html>

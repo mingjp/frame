@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<canvas id="canvas" width="400" height="500"></canvas>	
+	</body>
+	<script type="text/javascript">
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+		
+		with(ctx){
+			beginPath();
+			strokeStyle = "black";
+            moveTo(50, 50);
+            bezierCurveTo(50, 50,150, 50, 150, 150);
+            stroke();
+            quadraticCurveTo(150, 250, 250, 250);
+            stroke();
+			strokeStyle = "red";
+			stroke();
+		}
+	</script>
+</html>

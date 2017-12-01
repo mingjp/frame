@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+		var obj = {name: 'a'};
+		Object.defineProperty(obj, 'name', {
+			configurable: false, //属性是否可配置。可配置的含义包括：是否可以删除属性（ delete ），是否可以修改属性的 writable 、 enumerable 、 configurable 属性。
+		    enumerable: false, //属性是否可枚举。可枚举的含义包括：是否可以通过 for...in 遍历到，是否可以通过 Object.keys() 方法获取属性名称。
+		    writable: false, //属性是否可重写。可重写的含义包括：是否可以对属性进行重新赋值。
+		    value: null, //属性的默认值。
+		    set: function(key,value){},
+		    get: function(key,value){}			
+		})
+
+		//但是，如果为user增加一个新的属性，比如user里没有id属性，增加一个 user.id=1，Object.defineProperty函数是不知道存在'id'的，也就无法写出上面的代码，这可以用ES6提供的Proxy代理处理，代码如下：
+		var user = new Proxy({},{
+		     set:function(target,key,value,receiver){
+		       //处理代码
+		     }
+		})
+	</script>
+</body>
+</html>

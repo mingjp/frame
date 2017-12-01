@@ -1,0 +1,112 @@
+邓振业 14:07:57
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="../../../../libs/vue/vue.min.js"></script>
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #app{
+            margin:0px auto;
+            max-width: 640px;
+        }
+        label{
+            width:10rem;
+            display:inline-block;
+            text-align:right;
+        }
+        div{
+            margin:10px;
+        }
+        button{
+            margin-left:10rem;
+        }
+        fieldset{
+            border: 1px solid #BCBCBC;
+        }
+        table{
+            width:100%;
+        }
+        th{
+            background:#ccc;
+            border-collapse: collapse;
+            border: 1px solid #bcbcbc;
+    padding: 5px 10px;
+            border-spacing: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <fieldset>
+            <legend>创建</legend>
+            <div>
+                <label for="username">name</label>
+                <input type="text" name="username" id="username" v-model="newPeople.name"/>
+            </div>
+            
+            <div>
+                <label for="age">age</label>
+                <input type="text" name="age" id="age" v-model="newPeople.age"/>
+            </div>
+            <div>
+                <label>sex</label>
+                <select v-model="newPeople.sex">
+                    <option  v-for="attr in sex">
+                        {{attr}}
+                    </option>
+                </select>
+            </div>
+            <div>
+                <button @click="create">生成</button>
+            </div>
+        </fieldset>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Sex</th>
+                    <th>删除</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(attr,index) in peopleData">
+                   <th>{{attr.name}}</th>
+                   <th>{{attr.age}}</th>
+                   <th>{{attr.sex}}</th>
+                   <th><input type="button" name="button" value="delete" :data-index= index @click="delete(index)" /></th> 
+                <tr>
+            </tbody>
+        </table>
+    </div> 
+
+    <script>
+        var ve = new Vue({
+            el : '#app',
+            data:{
+                sex:['男','女'],
+                newPeople:{name:'',age:'',sex:''},
+                peopleData:[]
+            },
+            methods:{
+                create:function(){
+                    this.peopleData.push(this.newPeople);
+                    this.newPeople  = {name:'',age:'',sex:''}
+                },
+                //delete在javascript中有其他用途
+                delete:function(index){
+                    console.log(index);
+                    this.peopleData.splice(index,1);
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<script type="text/javascript" src="../../../../libs/vue/vue.js"></script>
+</head>
+<body>
+	<div id="div1">
+		<h3 :style="{color: color, fontSize: fontSize, backgroundColor: '#ccc'}">对象语法1</h3>
+		<h3 :style="styleObject">对象语法2</h3>
+		<h3 :style="[styleObject, {background: '#ccc'}]">数组语法1</h3>
+	</div>
+	
+	<script type="text/javascript">
+		var vm = new Vue({
+			el: '#div1',
+			data: {
+				color: 'red',
+				fontSize: '12px',
+				styleObject: {
+					color: 'red',
+					fontSize: '18px',
+				}
+			}
+		})
+	</script>
+</body>
+</html>

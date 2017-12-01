@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			body{
+				text-align: center;
+				padding-top: 30px;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="400" height="500"></canvas>
+	</body>
+	<script type="text/javascript">
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+		
+		ctx.beginPath();
+		ctx.fillStyle = "red";
+		ctx.lineWidth = 0;
+		ctx.rect(10,10,100,100);
+		ctx.fill();
+		ctx.closePath();
+		
+		// ctx.beginPath();
+		// ctx.strokeStyle = "black";
+		// ctx.lineWidth = 10;
+		// ctx.rect(120,10,100,100);
+		// ctx.stroke();
+		// ctx.closePath();
+		
+		// ctx.beginPath();
+		// ctx.fillStyle="rgba(255,0,0,0.6)";
+		// ctx.fillRect(230,10,100,100);
+		// ctx.closePath();
+		
+		// ctx.beginPath();
+		// ctx.fillStyle="#f00";
+		// ctx.fillRect(10,120,100,100);
+		// ctx.closePath();
+		
+		// ctx.beginPath();
+		// ctx.strokeStyle = "rgb(0,0,255)";
+		// ctx.lineWidth = 1;
+		// ctx.strokeRect(120,120,100,100);
+		// ctx.closePath();
+		
+		// ctx.beginPath();
+		// ctx.clearRect(60,60,220,110);
+		// ctx.closePath();
+		// ctx.beginPath();
+		// ctx.fillStyle = "blue";
+		// ctx.fillRect(70,70,50,50);
+		// ctx.closePath();
+	</script>
+</html>

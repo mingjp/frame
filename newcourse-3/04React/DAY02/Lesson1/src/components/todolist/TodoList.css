@@ -1,0 +1,21 @@
+.item{list-style: none; width: 300px; padding: 10px; background-color: #ccc; margin-bottom: 10px;}
+
+.todolist-enter {/*begin*/
+  opacity: 0.01;
+  transform: translateX(300px);
+}
+
+.todolist-enter.todolist-enter-active {/*finish*/
+  opacity: 1;
+  transition: all .5s;
+  transform: translateX(0);
+}
+
+.todolist-leave {
+  opacity: 1;
+}
+
+.todolist-leave.todolist-leave-active {
+  opacity: 0.01;
+  transition: all .5s;
+}

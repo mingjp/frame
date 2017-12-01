@@ -1,0 +1,19 @@
+<!-- <p *ngFor="let key of [] | range: 10">{{key}}</p> -->
+<h2>datagrid-{{dic.lanType}}</h2>
+<div dataform *ngIf="studentConfig && studentConfig['Search']" [config]="studentConfig['Search']"></div>
+<table *ngIf="dataset">
+  <thead>
+    <tr>
+      <ng-template ngFor let-key [ngForOf]="getKeys(dataset[0])">
+        <th *ngIf="columns.indexOf(key) > -1">{{dictionary.dic[dic.lanType][key] || key}}</th>
+      </ng-template>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let obj of dataset">
+      <ng-template ngFor let-key [ngForOf]="getKeys(obj)">
+          <td *ngIf="columns.indexOf(key) > -1">{{  obj[key] | format: dataFormat[key] }}</td>
+        </ng-template>      
+    </tr>
+  </tbody>
+</table>

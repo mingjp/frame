@@ -1,0 +1,6 @@
+﻿CACHE MANIFEST
+#version 1.0
+CACHE:
+js/jquery-2.1.0.js
+FAILBACK:
+sql.html

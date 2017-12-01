@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="../../../../libs/angular/angular.min.js"></script>
+        <script src="../../../../libs/angular/angular-sanitize.min.js"></script>
+    </head>
+    <body >
+        <div ng-app="myApp">
+            <div  ng-controller="myController">
+                <h1>{{1+1}}</h1>
+                <div ng-bind-html="html"></div>
+                <h2 ng-bind="name"></h2>
+                <input type="button" value="click" ng-click="click()"/>
+            </div> 
+            
+            <div ng-controller="myC1">
+                <h3>{{10 * 10}}</h3>
+                <h1>{{name}}</h1>
+                
+            </div>
+
+        </div>
+        <script>
+            //mvc
+            //定义一个 ng 模块
+            //依赖注入
+            var app = angular.module('myApp', ['ngSanitize']);
+            app.controller('myController', function($scope){
+                // 数据层
+                $scope.name = "Tom";
+                $scope.click = function(){
+                    console.log(1);
+                }
+                $scope.html = "<a href='www.1000phone.com'>1000phone</a>"
+                $scope.dataset = [{a: {b: {}}}]
+            })
+
+            //服务
+            app.controller('myC1', function($scope){
+                $scope.name = "Som";
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,17 @@
+/**swiper-tab**/  
+.swiper-tab{width: 100%; border-bottom: 2rpx solid #777777; text-align: center;  line-height: 80rpx;}  
+.swiper-tab-list{font-size: 30rpx; display: inline-block; width: 25%; color: #777777;}  
+.on{color: #da7c0c; border-bottom: 5rpx solid #da7c0c;}  
+/*swiper*/  
+.swiper-box{display: block; height: 100%; width: 100%; overflow: hidden;}  
+.swiper-box .content{background-color: #98d0f8; height: 100%;}  
+
+.weather-list{width: 100%; height: 326rpx; border-top: solid 1rpx #fff; overflow: hidden; font-size: 12px; color: #fff; text-align: center; position: absolute; bottom: 0;}
+.weather-list>.weather-item{width: 24%; border-right: solid 1rpx #fff; float: left; height: 100%; padding-top: 10px;}
+.weather-list>.weather-item:last-child{border:none;}
+.weather-list>.weather-item view{padding:2px 7px;}
+.weather-list image{width: 80%; height: 30px;}
+
+.weather-current{width: 100%; position: absolute; top: 0; bottom: 326px; text-align: center; color: #fff;}
+.weather-current image{width:80%; height: 100px;}
+.weather-current>.weather-item view{padding-top: 10px;}

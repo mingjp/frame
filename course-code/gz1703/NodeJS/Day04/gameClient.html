@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="jquery.js"></script>
+        <script src="socket.io.min.js"></script>
+        <style type="text/css" media="screen">
+            body{font-size: 12px; margin: 0; pa}
+            div{width: 50px; height: 50px; background-color: #ccc; transition: all 0.8s; position: absolute; left: 0px; top: 0px;}
+        </style>        
+    </head>
+    <body>
+        <input type="text" id="nickname">
+        <input type="button" id="btnCreate" value="创建角色">
+    </body>
+
+    <script>
+        var person = {},socket;
+        $('#btnCreate').click(function(){
+            //定义人物属性
+			person = {
+				id: parseInt(Math.random() * 1000000),
+				nickname: $('#nickname').val(),
+				x: 0,
+				y: 0
+			}
+            
+            $('#nickname, #btnCreate').hide();
+
+            socket = io.connect('ws://localhost:1703');
+            socket.emit('serverLogin', JSON.stringify(person));
+
+            socket.on('clientCreatePerson', function(_person){
+				var _personObj = JSON.parse(_person);
+				for(var key in _personObj){
+					if(!$('#'+ key)[0])	{
+						$('<div></div>').attr('id', _personObj[key].id).css({left: _personObj[key].x, top: _personObj[key].y}).text(_personObj[key].nickname).appendTo('body');				
+					}
+				}                
+            })
+
+            socket.on('clientMovePerson', function(_person){
+                
+                var _personObj = JSON.parse(_person);
+                console.log($('#' + _personObj.id), _personObj.id)
+                $('#' + _personObj.id).css({left:_personObj.x, top:_personObj.y});
+            })
+        })
+
+        $(document).click(function(event){
+            if(!socket){
+                return false;
+            }
+            person.x = event.pageX;
+            person.y = event.pageY;
+
+            socket.emit('serverMove', JSON.stringify(person));
+        })
+    </script>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Component</title>
+	<!-- React 的核心库 -->
+	<script type="text/javascript" src="../../../../libs/react/react.js"></script>
+	<!-- 提供与 DOM 相关的功能 -->
+	<script type="text/javascript" src="../../../../libs/react/react-dom.js"></script>
+	<!-- 将 JSX 语法转为 JavaScript 语法 -->
+	<script type="text/javascript" src="../../../../libs/react/browser.min.js"></script>
+
+	<script type="text/javascript" src="../../../../libs/jquery/jquery-2.1.1.min.js"></script>
+
+</head>
+<body>
+	<div id='div0' name="Tom"></div>
+	<div id='div1'></div>
+	<div id="div2"></div>
+	<div id="div3"></div>
+	<div id="div4"></div>
+	<div id="div5"></div>
+	<div id="div6"></div>
+	
+
+	<script type="text/babel">
+
+		//div0
+		//组件名称
+		var Compoent0 = React.createClass({
+			render: function(){
+				return(
+					<div>
+						<ul>
+							<li>Lucy1</li>
+							<li>Lucy2</li>
+							<li>Lucy3</li>
+						</ul>
+					</div>
+				);
+			}
+		});
+
+		// ReactDOM.render(<Compoent0></Compoent0> , document.getElementById('div0'));
+		// ReactDOM.render(<h1></h1> , document.getElementById('div0'));
+		ReactDOM.render(<Compoent0 /> , document.getElementById('div0'));
+
+		//div1
+		var Component1 = React.createClass({
+			render() {
+				return <h3>Hello {this.props.name}</h3>;
+			}
+		});
+		ReactDOM.render(<Component1 name="Tom"/>, document.getElementById('div1'));
+
+		//div2
+		//this.props 能得到组件本身的自定义属性
+		//this.props
+		var Component2 = React.createClass({
+			propTypes: {
+				title: React.PropTypes.string.isRequired,
+				name: React.PropTypes.string.isRequired
+			},
+			getDefaultProps() {
+				//组件初始化时定义的默认属性（默认值）
+				return {
+					name: 'Tom',
+					age: 18,
+					title: 'Learning React Component'
+				};
+			},
+			render() {
+				// console.log(this.props);
+				return (
+					<ul>
+					{
+						React.Children.map(this.props.children, function(item){
+							return <li>{item}</li>;
+						})
+					}
+					</ul>
+				);
+			}
+		});
+		var data = "Sam";
+		ReactDOM.render( 
+			<Component2 name1={data} name2="Tom">
+				<span>Tom1</span>
+				<span>Tom2</span>
+			</Component2>,
+			document.getElementById('div2')
+		);
+
+		//div3
+		var Component3 = React.createClass({
+			focusHandler: function(){
+				this.refs.name.value = 123;
+				this.refs.name2.focus();
+			},
+			render: function(){
+				//{console.log(document.getElementById("dkInput"))}
+				return (
+					<div>
+						<input type="text" name="name" placeholder="" ref="name2"  id="dkInput"/>
+						<input type="text" name="name" placeholder="" ref="name"  id="dkInput"/>
+						<input type="button" name="" value="focus" onClick={this.focusHandler} />
+					</div>
+				);
+			}
+		});
+		ReactDOM.render(<Component3/>, document.getElementById('div3'));
+
+		//div4
+		var FormComponent = React.createClass({
+			getInitialState: function() {
+				return {value: 'Lucy.Lan'};
+			},
+			getDefaultProps: function(){
+				return {name: 'Tom'};
+			},
+			changeHandler: function(event){
+				// this.state.value = event.target.value;
+				// setState => 更新 state 对象
+				this.setState({value: event.target.value});
+			},
+			render: function(){
+				return(
+				<div>
+					<input type="text" name="" value={this.state.value} placeholder="" onChange={this.changeHandler}/>
+					<p>{this.state.value}</p>
+					<h1>{this.state.value}</h1>
+				</div>
+				);
+			}
+		});
+		ReactDOM.render(<FormComponent/>, document.getElementById('div4'));
+
+		//div5
+		var Component4 = React.createClass({
+			getInitialState: function() {
+				//初始化 state
+				return {value: 10, opacity: 0.5};
+			},
+			componentDidMount: function() {
+				this.timer = window.setInterval(function(){
+					var _value = this.state.value;
+					_value -= 1;
+					this.setState({value: _value});
+					if(_value <= 0){
+						window.clearInterval(this.timer);
+						this.timer = null;
+					};
+				}.bind(this), 1000);
+			},
+			render: function(){
+				return(
+					<div>
+						<p style={{opacity: this.state.opacity}}>{this.state.value}</p>
+					</div>
+				);
+			}
+		});
+		ReactDOM.render(<Component4/>, document.getElementById('div5'));
+
+		//div6
+		var Component5 = React.createClass({
+			getInitialState: function() {
+				return {name: 'Tom'};
+			},
+			componentDidMount: function() {
+				$.getJSON('./src/data/demo.json', function(_response){
+					if(this.isMounted()){
+						this.setState({
+							name: _response.name
+						})
+					}
+				}.bind(this));
+			},
+			render: function(){
+				return(
+					<div>
+						<h2>my name is {this.state.name}</h2>
+					</div>
+				);
+			}
+		});
+		ReactDOM.render(<Component5/>, document.getElementById('div6'));
+	</script>
+</body>
+</html>

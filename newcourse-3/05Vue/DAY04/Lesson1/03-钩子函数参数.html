@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<script type="text/javascript" src="../../../../libs/vue/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<p v-demo:hello.a.b="{name: 'Tom', age: 18}">
+			<span>Tom</span>
+		</p>
+	</div>
+
+	<script type="text/javascript">
+
+		Vue.directive('demo', function(el, binding, vnode){
+			console.log(binding);
+		});
+
+		var vm = new Vue({
+			el: '#app',
+			data:{
+				text: '钩子函数-bind'
+			},
+			directives: {
+				//注册一个局布指令
+				private: function(element){
+					element.style.background = '#ccc';
+				}
+			}
+		})
+	</script>
+</body>
+</html>

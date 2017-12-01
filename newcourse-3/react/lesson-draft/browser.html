@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<!-- React 的核心库 -->
+	<script type="text/javascript" src="../../../libs/react/react.js"></script>
+	<!-- 提供与 DOM 相关的功能 -->
+	<script type="text/javascript" src="../../../libs/react/react-dom.js"></script>
+	<!-- 将 JSX 语法转为 JavaScript 语法 -->
+	<script type="text/javascript" src="../../../libs/react/browser.min.js"></script>
+	<script type="text/javascript" src="../../../libs/jquery/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+	<div id="div1"></div>
+	<div id="div2"></div>
+	<div id="div3"></div>
+	<div id="div4"></div>
+	<div id="div5"></div>
+	<div id="div6"></div>
+	<div id="div7"></div>
+	<div id="div8"></div>
+	<div id="div9"></div>
+	<div id="div10"></div>
+
+	<script type="text/babel">
+		// type="text/babel" 是 jsx 的一套语法糖
+		// 不带引号
+		
+		ReactDOM.render(<h1>Sam</h1>, document.getElementById('div1'));
+
+		// var name = 'DK.Lan';
+		// ReactDOM.render(<h1>{name}</h1>, document.getElementById('div2'));
+
+		// var obj = {name: 'DK.Lan'};
+		// ReactDOM.render(<h1>{obj.name}</h1>, document.getElementById('div3'));
+
+		// var array = ['DK.Lan', 'Tom'];
+		// ReactDOM.render(
+		// 	<div>{
+		// 		array.map(function(index, elem) {
+		// 			return <h1 key={index}>{index}</h1>;
+		// 		})
+		// 	}</div>, 
+		// 	document.getElementById('div4')
+		// );
+
+		// var Component1 = React.createClass({
+		// 	render() {
+		// 		return <h3>Hello  {this.props.name}</h3>;
+		// 	}
+		// });
+		// ReactDOM.render(<Component1 name="DK.Lan"/>, document.getElementById('div5'));
+
+		// var Component2 = React.createClass({
+		// 	getDefaultProps() {
+		// 		return {
+		// 			name: 'dk.lan'
+		// 		};
+		// 	},
+		// 	propTypes: {
+		// 		title: React.PropTypes.string,
+		// 		name: React.PropTypes.string.isRequired
+		// 	},
+		// 	render() {
+		// 		return (
+		// 			<ul>
+		// 			{
+		// 				React.Children.map(this.props.children, function(name){
+		// 					return <li>{name}</li>;
+		// 				})
+		// 			}
+		// 			</ul>
+		// 		);
+		// 	}
+		// });
+		// var data = "123";
+		// ReactDOM.render(
+		// 	<Component2 title={data}>
+		// 		<span>dk.lan</span>
+		// 		<span>dk.lan</span>
+		// 	</Component2>,
+		// 	document.getElementById('div6')
+		// );
+
+		// var Component3 = React.createClass({
+		// 	focusHandler: function(){
+		// 		this.refs.name.focus();
+		// 	},
+		// 	render: function(){
+		// 		return (
+		// 			<div>
+		// 				<input type="text" name="name" placeholder="" ref="name" />
+		// 				<input type="button" name="" value="focus" onClick={this.focusHandler} />
+		// 			</div>
+		// 		);
+		// 	}
+		// });
+		// ReactDOM.render(<Component3/>, document.getElementById('div7'));
+
+		// var FormComponent = React.createClass({
+		// 	getInitialState: function() {
+		// 		return {value: 'dk.lan'};
+		// 	},
+		// 	changeHandler: function(event){
+		// 		this.setState({value: event.target.value});
+		// 	},
+		// 	render: function(){
+		// 		return(
+		// 		<div>
+		// 			<input type="text" name="" value={this.state.value} placeholder="" onChange={this.changeHandler}/>
+		// 			<p>{this.state.value}</p>
+		// 		</div>
+		// 		);
+		// 	}
+		// });
+		// ReactDOM.render(<FormComponent/>, document.getElementById('div8'));
+
+		// var Component4 = React.createClass({
+		// 	getInitialState: function() {
+		// 		return {value: 10, opacity: 0.5};
+		// 	},
+		// 	componentDidMount: function() {
+		// 		this.timer = window.setInterval(function(){
+		// 			var _value = this.state.value;
+		// 			_value -= 1;
+		// 			this.setState({value: _value});
+		// 			if(_value <= 0){
+		// 				window.clearInterval(this.timer);
+		// 				this.timer = null;
+		// 			};
+		// 		}.bind(this), 1000);
+		// 	},
+		// 	render: function(){
+		// 		return(
+		// 			<div>
+		// 				<p style={{opacity: this.state.opacity}}>{this.state.value}</p>
+		// 			</div>
+		// 		);
+		// 	}
+		// });
+		// ReactDOM.render(<Component4/>, document.getElementById('div9'));
+
+		// var Component5 = React.createClass({
+		// 	getInitialState: function() {
+		// 		return {name: 'Tom'};
+		// 	},
+		// 	componentDidMount: function() {
+		// 		$.getJSON('./src/data/demo.json', function(_response){
+		// 			if(this.isMounted()){
+		// 				this.setState({
+		// 					name: _response.name
+		// 				})
+		// 			}
+		// 		}.bind(this));
+		// 	},
+		// 	render: function(){
+		// 		return(
+		// 			<div>
+		// 				<h2>my name is {this.state.name}</h2>
+		// 			</div>
+		// 		);
+		// 	}
+		// });
+		// ReactDOM.render(<Component5/>, document.getElementById('div10'));		
+	</script>
+</body>
+</html>

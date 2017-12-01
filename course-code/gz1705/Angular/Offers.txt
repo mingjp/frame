@@ -1,0 +1,231 @@
+﻿/*===============================================
+**	author: DK.Lan
+**  date:2016-04-22
+**  descript: 报价专员-列表
+**		and (@purchasetime is null or date_format(inv.applytime, '%Y-%m-%d') >= @purchasetime)
+**		and (@purchasetimeto is null or date_format(inv.applytime, '%Y-%m-%d') <= @purchasetimeto)
+**		and (@logtime is null or (po.apid is not null and date_format(po.createtime, '%Y-%m-%d') >= @logtime))
+**		and (@logtimeto is null or (po.apid is not null and date_format(po.createtime, '%Y-%m-%d') <= @logtimeto))
+=================================================*/
+
+{
+	CommandText: "
+		select
+			SQL_CALC_FOUND_ROWS
+			inv.*,
+			car.frame,
+			dep.depname,
+			emp.empname,
+			unit.unitname,
+			po.empname as logname,
+			po.createtime as logtime,
+			po2.empname as logname2,
+			po2.createtime as logtime2,	
+			po3.empname as logname3,
+			po3.createtime as logtime3,								
+			invlog.createtime as confirmtime,
+			invlog2.createtime as confirmtime2,
+			iq.empname as iqempname,
+			case when img.apid is not null then 1 else 0 end as hasimg
+		from
+			inv_apply_purchase inv
+			inner join bas_car car on inv.carid = car.carids
+			inner join bas_dep dep on inv.apdepid = dep.depid
+			inner join bas_emp emp on inv.apempid = emp.empid
+			left join bas_unit unit on inv.unitid = unit.unitid
+			left join
+			(
+				select
+					iq.apid,
+					iq.state,
+					group_concat(iq.state) as states,
+					iq.ifusing,
+					iq.counts,
+					emp.empname								
+				from
+					inv_quote iq
+					inner join bas_emp emp on iq.quote_empid = emp.empid	
+				where
+					iq.ifusing = 1
+					and iq.counts > 0	
+				group by
+					iq.apid,
+					emp.empname					
+			) as iq on inv.apid = iq.apid
+			left join
+			(
+				select
+					invlog.apid,
+					max(invlog.createtime) as createtime,
+					group_concat(emp.empname) as empname
+				from
+					inv_apply_purchase_log invlog
+					inner join bas_emp emp on invlog.creater = emp.empid
+				where
+					state = 30
+				group by 
+					invlog.apid
+			) invlog on inv.apid = invlog.apid
+			left join
+			(
+				select
+					invlog.apid,
+					max(invlog.createtime) as createtime,
+					group_concat(emp.empname) as empname
+				from
+					inv_apply_purchase_log invlog
+					inner join bas_emp emp on invlog.creater = emp.empid
+				where
+					state = 50
+				group by 
+					invlog.apid
+			) invlog2 on inv.apid = invlog2.apid
+			left join
+			(
+				select
+					polog.apid,
+					max(polog.createtime) as createtime,
+					group_concat(emp.empname) as empname
+				from
+					inv_purchase_orders_log polog
+					inner join bas_emp emp on polog.creater = emp.empid
+				where
+					state = 63
+				group by 
+					polog.apid
+			) po on inv.apid = po.apid
+			left join
+			(
+				select
+					polog.apid,
+					max(polog.createtime) as createtime,
+					group_concat(emp.empname) as empname
+				from
+					inv_purchase_orders_log polog
+					inner join bas_emp emp on polog.creater = emp.empid
+				where
+					state = 80
+				group by 
+					polog.apid
+			) po2 on inv.apid = po2.apid		
+			left join
+			(
+				select
+					polog.apid,
+					max(polog.createtime) as createtime,
+					group_concat(emp.empname) as empname
+				from
+					inv_purchase_orders_log polog
+					inner join bas_emp emp on polog.creater = emp.empid
+				where
+					state = 70
+				group by 
+					polog.apid
+			) po3 on inv.apid = po3.apid						
+			left join
+			(
+				select
+					temp.apid
+				from
+				(
+					select 
+						po.apid
+					from 
+						inv_r_purchase_order_images a 
+						inner join bas_images b on a.imgid = b.imgid 
+						inner join inv_purchase_orders po on a.poid = po.poid 		
+				) as temp
+				group by
+					temp.apid				
+			) img on inv.apid = img.apid and inv.state = 63
+		where
+			inv.state > 0
+			and 
+			(
+				@state is null 
+				or 
+				(
+					inv.state = @state 
+					or 
+					(
+						LOCATE(@state,iq.states) > 0
+						-- ((inv.state = 69 and iq.state = 69) or (inv.state >= 30 and inv.state != 69 and iq.ifusing > 0 and iq.counts > 0) or inv.state < 30)
+					)
+				)
+			)
+			and (@carnum is null or inv.carnum = @carnum)
+			and (@depname is null or find_in_set(dep.depname, @depname))
+			and (@contract is null or inv.contract = @contract)
+			and (@applytime is null or date_format(inv.applytime, '%Y-%m-%d') >= @applytime)
+			and (@applytimeto is null or date_format(inv.applytime, '%Y-%m-%d') <= @applytimeto)
+			and (@confirmtime is null or (invlog.apid is not null and date_format(invlog.createtime, '%Y-%m-%d') >= @confirmtime))
+			and (@confirmtimeto is null or (invlog.apid is not null and date_format(invlog.createtime, '%Y-%m-%d') <= @confirmtimeto))
+			and (@purchasetime is null or date_format(invlog2.createtime, '%Y-%m-%d') >= @purchasetime)
+			and (@purchasetimeto is null or date_format(invlog2.createtime, '%Y-%m-%d') <= @purchasetimeto)
+			and (@logtime is null or (po.apid is not null and date_format(po.createtime, '%Y-%m-%d') >= @logtime))
+			and (@logtimeto is null or (po.apid is not null and date_format(po.createtime, '%Y-%m-%d') <= @logtimeto))
+			and (@logtime3 is null or (po3.apid is not null and date_format(po3.createtime, '%Y-%m-%d') >= @logtime3))
+			and (@logtimeto3 is null or (po3.apid is not null and date_format(po3.createtime, '%Y-%m-%d') <= @logtimeto3))
+			and (@logtime2 is null or (po2.apid is not null and date_format(po2.createtime, '%Y-%m-%d') >= @logtime2))
+			and (@logtimeto2 is null or (po2.apid is not null and date_format(po2.createtime, '%Y-%m-%d') <= @logtimeto2))
+			and (@iqempname is null or iq.empname like concat('%',@iqempname,'%'))
+			and (@poempname is null or po.empname like concat('%',@poempname,'%'))
+		order by 
+			inv.applytime desc
+		limit @pageindex, @pagesize;
+		SELECT FOUND_ROWS();
+	",
+	Fields: "carnum,contract,goodsname,count,unitname,depname,empname,state,applytime,iqempname,confirmtime,confirmtime2,logname,logtime,logname3,logtime3,logname2,logtime2,hasimg",
+	HideFields: "apid",
+	Delete: false,
+	Layout: "1,2,1,2,1,2,1,2",
+	ToolButtons:{"state1": "reload(10)", "state23": "reload(23)", "state30": "reload(30)", "state40": "reload(40)", "state50": "reload(50)", "state53": "reload(53)", "state63": "reload(63)", "state69": "reload(69)","state70":"reload(70)","state71":"reload(71)", "state80": "reload(80)", "state90": "reload(90)"},
+	FieldAttributes:[
+		{ ParamName:"contract", ParamWidth: 100, Layout:"1,1", ParamType:"List-String", DataSource:{"0":"无", "1": "有"} },
+		{ ParamName:"hasimg", ParamWidth: 100, ParamType:"List-String", DataSource:{"0":"", "1": "√"} },
+		{ ParamName:"state", DefaultValue: 10 },
+		{ ParamName:"count", ParamWidth: 80 },
+		{ ParamName:"goodsname", ParamWidth: 250 },
+		{ ParamName:"unitname", ParamWidth: 80 },
+		{ ParamName:"depname", ParamType:"List-DB", DataSource:{"CommandText": "select facname,facname from bas_subfacade where factypeid > 0"} },
+		{ ParamName:"applytime", Layout:"1,3", ParamClass: "col-sm-6", ParamType: "DateTime", GroupName: 'applytime', DataFormat: "yyyy-MM-dd hh:mm:ss" },
+		{ ParamName:"applytimeto", ParamClass: "col-sm-6", ParamType: "DateTime", GroupName: 'applytime', DataFormat: "yyyy-MM-dd hh:mm:ss" },
+		{ ParamName:"purchasetime", Layout:"1,3", ParamClass: "col-sm-6", ParamType: "DateTime", GroupName: 'purchasetime', DataFormat: "yyyy-MM-dd hh:mm:ss" },
+		{ ParamName:"purchasetimeto", ParamClass: "col-sm-6", ParamType: "DateTime", GroupName: 'purchasetime', DataFormat: "yyyy-MM-dd hh:mm:ss" },
+		{ ParamName:"logtime", Layout:"1,3", ParamClass: "col-sm-6", ParamType: "DateTime", GroupName: 'logtime', DataFormat: "yyyy-MM-dd hh:mm:ss" },
+		{ ParamName:"logtimeto", ParamClass: "col-sm-6", ParamType: "DateTime", GroupName: 'logtime', DataFormat: "yyyy-MM-dd hh:mm:ss" },
+		{ ParamName:"logtime2", Layout:"1,3", ParamClass: "col-sm-6", ParamType: "DateTime", GroupName: 'logtime2', DataFormat: "yyyy-MM-dd hh:mm:ss" },
+		{ ParamName:"logtimeto2", ParamClass: "col-sm-6", ParamType: "DateTime", GroupName: 'logtime2', DataFormat: "yyyy-MM-dd hh:mm:ss" },
+		{ ParamName:"logtime3", Layout:"1,3", ParamClass: "col-sm-6", ParamType: "DateTime", GroupName: 'logtime3', DataFormat: "yyyy-MM-dd hh:mm:ss" },
+		{ ParamName:"logtimeto3", ParamClass: "col-sm-6", ParamType: "DateTime", GroupName: 'logtime3', DataFormat: "yyyy-MM-dd hh:mm:ss" },
+		{ ParamName:"confirmtime", Layout:"1,3", ParamClass: "col-sm-6", ParamType: "DateTime", GroupName: 'confirmtime', DataFormat: "yyyy-MM-dd hh:mm:ss" },
+		{ ParamName:"confirmtimeto", ParamClass: "col-sm-6", ParamType: "DateTime", GroupName: 'confirmtime', DataFormat: "yyyy-MM-dd hh:mm:ss" },
+		{ ParamName:"confirmtime2", ParamType: "DateTime"}
+	], Dictionays:{
+		"state1": "待报价",
+		"state53": "采购审批驳回",
+		"state30": "服务顾问确认",
+		"state23": "已提交报价",
+		"state50": "采购审批通过",
+		"state69": "分拣驳回",
+		"state40": "采购审批中",
+		"state63": "已分拣",
+		"state70": "配送中，待接件",
+		"state71": "取消配送",
+		"state80": "已接件，待入库",
+		"state90": "已入库",
+		"logname": "分拣人",
+		"logtime": "分拣时间",
+		"logname2": "接件人",
+		"logtime2": "接件时间",
+		"logname3": "配送人",
+		"logtime3": "配送时间",
+		"confirmtime": "门店确认时间",
+		"hasimg": "分拣照片",
+		"purchasetime": "采购审核时间",
+		"logtime": "分拣时间",
+		"iqempname": "报价专员",
+		"poempname": "分拣专员",
+		"confirmtime2": "采购审批通过时间"
+	}
+}

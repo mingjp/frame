@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="../vue.js"></script>
+        <script src="../../../../libs/vue/vue-router.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h1>{{message}}</h1>
+            <router-link to="/a/tom">a</router-link>
+            <input type="button" value="a" @click="pusha">
+            <router-view></router-view>
+            <router-view name="left"></router-view>
+            <router-view name="main"></router-view>
+        </div>
+
+        <script>
+            var router = new VueRouter({
+                routes: [
+                    {path: '/a/:name', name: 'a', component: {template: '<h1>a => name: {{$route.params.name}}</h1>'}},
+                    {path: '/b/:name/:age', component: {template: '<h1>name:{{$route.params.name}} age: {{$route.params.age}}</h1>'}}
+                ]
+            })
+
+            var component1 = {
+                template: `
+                    <div>
+                        <h1>一楼</h1>
+                        <router-view></router-view>
+                    </div>
+                `
+            }
+
+            var router2 = new VueRouter({
+                routes: [
+                    {path: '/floor1', component: component1, children:[
+                        {path: 'floor2', component: {template: '<h1>二楼</h1>'}}
+                    ]}             
+                ]
+            })
+
+            var router3 = new VueRouter({
+                routes: [
+                    {path: '/', components: {
+                        default: {template: '<h1>default router</h1>'},
+                        left: {template: '<h1>left</h1>'},
+                        main: {template: '<h1>main</h1>'}
+                    }}
+                ]
+            })
+
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    message: 'Hello Router'
+                },
+                methods: {
+                    pusha: function(){
+                        console.log(this);
+                        // router.push('/a/sam');
+                        router.push({name: 'a', params: {name: 'lucy'}});
+                    }
+                },
+                router: router3
+            })
+        </script>
+    </body>
+
+</html>

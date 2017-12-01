@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>默认属性</title>
+    <script src="../lib/react/react.js" type="text/javascript"></script>
+    <script src="../lib/react/react-dom.js" type="text/javascript"></script>
+    <script src="../lib/react/browser.min.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="app1">
+        
+    </div>
+    <script type="text/babel">
+    var Component1 = React.createClass({
+        getDefaultProps:function(){
+            return {
+                name:'mjp',
+                age:18
+            }
+        },
+        render:function(){
+
+            return (
+                <div>
+                    <p>{this.props.name}</p>
+                    <p>{this.props.age}</p>
+                </div>
+            )
+        }
+
+    })
+
+    ReactDOM.render(<Component1 />,document.getElementById('app1'))
+    </script>
+</body>
+</html>

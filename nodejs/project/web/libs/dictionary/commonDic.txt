@@ -1,0 +1,14 @@
+{
+	"cn": {
+		"_id": "标识",
+		"procode": "条码",
+		"proprice": "价格",
+		"proname": "产品名称"
+	},
+	"en": {
+		"_id": "ID",
+		"procode": "Product Code",
+		"proprice": "Product Price",
+		"proname": "Product Name"		
+	}
+}

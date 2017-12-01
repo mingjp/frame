@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<script type="text/javascript" src="../../../../libs/vue/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<global-component text="全局组件" title="gz1701"></global-component>
+			
+		<private-component my-text="局部组件"></private-component>
+		
+		<input v-model="parentMsg" />
+
+		<private-component :my-text="parentMsg"></private-component>
+
+		<tom-cat name="汤姆猫"></tom-cat>
+	</div>
+
+	<script type="text/javascript">
+		//全局组件
+		Vue.component('global-component', {
+			template: '<h1>{{text + title}}</h1>',
+			props:['text', 'title']
+		});
+
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				parentMsg: 'init'
+			},
+			components: { //局部组件
+				'private-component': {
+					template: '<h1>{{myText}}</h1>',
+					props: ['myText']
+				},
+				'tom-cat':{
+					template: '<h3>{{name}}</h3>',
+					props: ['name']
+				}
+			}
+		})
+	</script>
+</body>
+</html>

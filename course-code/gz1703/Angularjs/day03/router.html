@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="../../../../libs/angular/angular.min.js"></script>
+        <script src="../../../../libs/angular-ui/angular-ui-router.js"></script>
+    </head>
+    <body ng-app="myApp">
+        <a href="#/pagetab">pagetab</a>
+        
+        <div data-ui-view=""></div>
+
+        <script>
+            var app = angular.module('myApp', ['ui.router']);
+
+            app.config(function($stateProvider, $urlRouterProvider){
+                $stateProvider.state('pagetab', {
+                    url: '/pagetab',
+                    templateUrl: './pagetab.html',
+                    controller: 'pagetabController'
+                }).state('pagetab.page1', {
+                    url: '/page1', // => #/pagetab/page1
+                    templateUrl: './page1.html',
+                    controller: 'page1Controller'
+                })
+            })
+
+            app.controller('routerController', ['$scope', '$http', function($scope, $http){
+            }])
+
+            app.controller('pagetabController', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams){
+                $scope.name = "Tom";
+                // console.log($stateParams);
+            }])       
+            app.controller('page1Controller', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams){
+                $scope.name = "Sam";
+                // console.log($stateParams);
+            }])                      
+        </script>
+    </body>
+</html>

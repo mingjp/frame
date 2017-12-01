@@ -1,0 +1,38 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title></title>  
+</head>  
+<body>  
+<canvas id="canvas" width="1200" height="600" style="border:solid 1px #ccc;"></canvas> 
+<script type="text/javascript" src="../../../../libs/jquery/jquery-2.1.1.min.js"></script> 
+</body>  
+<script>  
+    var ocanvas = document.getElementById("canvas");  
+    var context = ocanvas.getContext("2d");  
+    context.fillStyle = 'red';
+    context.beginPath();
+    context.arc(0, 200, 30, 0, 2 * Math.PI, true);
+    context.closePath();
+    context.fill();
+
+    var speed = 10;
+    var startX = 0;
+    function move(){
+        startX += speed;
+        context.clearRect(0, 0, 1200, 600);
+        context.beginPath();
+        context.arc(startX, 200, 30, 0, 2 * Math.PI, true);
+        context.closePath();
+        context.fill();
+        if(startX >= 500){
+            startX = 0;
+        }
+    }
+
+    window.setInterval(move, 50);
+    
+    
+</script>  
+</html>  

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>自定义事件</title>
+    <script src="../../lib/jquery-3.1.1.js" type="text/javascript"></script>
+    <script src="../../lib/vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{total}}</p>
+        <button1 v-on:mm="add"></button1>
+        <input type="button" :value="btncount" @click="total" />
+    </div>
+    <script type="text/javascript">
+    // Vue.component('button1',{
+    //     template:'<input type=button :value="count" @click="create">',
+    //     data:function(){
+    //         return{
+    //             count:0,
+    //         }
+    //     },
+    //     methods:{
+    //         create:function(){
+    //             this.count += 1;
+    //             this.$emit('mm');
+    //         }
+    //     }
+    // });
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            count:0,//无效
+            total:0,
+        },
+        components:{
+            button1:{
+                template:'<input type=button :value="count" @click="create">',
+                data:function(){
+                    return{
+                        count:0,
+                    }
+                },
+                methods:{
+                    create:function(){
+                        this.count += 1;
+                        this.$emit('mm');
+                    }
+                }
+            }
+        },
+        methods:{
+            add:function(){
+                console.log(this.total);
+                this.total += 1;
+            },
+            total:function(){
+                this.
+            }
+        }
+    })
+    </script>
+</body>
+</html>

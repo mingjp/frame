@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <form action="http://localhost:1703/register" method="post">
+            <input type="text" name="username">
+            <input type="password" name="password" value="">
+            <input type="submit" name="" value="submit">            
+        </form>
+
+        <script>
+            // var arr = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]
+            // var arr1= [];
+            // for(var i=0;i<3;i++){
+            //     var arr2 = [];
+            //     for(var j=0;j<4;j++){
+            //         var n = parseInt(Math.random()*arr.length);
+            //         arr2[j] = arr[n];
+            //         arr.splice(n,1);
+            //     }
+            //     arr1[i] = arr2;
+            // }
+            // arr1.push(arr);
+            // console.log(arr1);
+            //
+            function suiji(total,n){
+                var arr=[];
+                var rel=[];
+                var cs=Math.ceil(total/n);
+                for(var i=0;i<total;i++){
+                    arr.push(i);
+                }
+                for(var j=0;j<cs;j++){
+                    var arr1=[];
+                    for(var k=0;k<n;k++){
+                        var random=parseInt(Math.random()*arr.length);
+                        arr1.push(arr[random]);
+                        arr.splice(random,1);
+                    }
+                    rel.push(arr1);
+                }
+                return rel;
+            }
+            console.log(suiji(20,4));
+        </script>
+        .
+    </body>
+</html>

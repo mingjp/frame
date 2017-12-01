@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>slot</title>
+    <script src="../../lib/jquery-3.1.1.js" type="text/javascript"></script>
+    <script src="../../lib/vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="app">
+        <component1>
+            <p>mjp</p>
+            <p slot="susan">susan</p>
+            <p slot="lucy">lucy</p>
+        </component1>
+
+        <components2>
+            <p slot="header">header</p>
+            <h1>slot</h1>
+            <p slot="footer">footer</p>
+        </components2>
+    </div>
+    <script type="text/javascript">
+    var vm = new Vue({
+        el:"#app",
+        data:{
+
+        },
+        components:{
+            component1:{
+                template:`<div>
+                    
+                    <slot name="susan"></slot>
+                    <slot name="lucy"></slot>
+                    <h1>mjp</h1>
+                    <slot></slot>
+                </div>`,
+            },
+            components2:{
+                template:'\
+                <div class="container">\
+                    <header>\
+                        <h2>Header</h2>\
+                        <slot name="header"></slot>\
+                    </header>\
+                    <main>\
+                        <slot></slot>\
+                    </main>\
+                    <footer>\
+                        <h2>Footer</h2>\
+                        <slot name="footer"></slot>\
+                    </footer>\
+                </div>\
+            '
+            }
+        }
+    })
+    </script>
+</body>
+</html>

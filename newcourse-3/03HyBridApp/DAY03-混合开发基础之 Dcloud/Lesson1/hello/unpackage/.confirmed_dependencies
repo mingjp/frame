@@ -1,0 +1,52 @@
+{
+	"index.html": {
+		"resources": [
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/update.js"
+		],
+		"refer": [
+			"index-menu.html",
+			"examples/guide.html",
+			"examples/accordion.html",
+			"examples/card.html",
+			"examples/info.html",
+			"examples/login.html"
+		]
+	},
+	"examples/accordion.html": {
+		"resources": [
+			"images/cbd.jpg",
+			"images/muwu.jpg",
+			"images/yuantiao.jpg",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"images/shuijiao.jpg"
+		]
+	},
+	"examples/card.html": {
+		"resources": [
+			"images/cbd.jpg",
+			"images/yuantiao.jpg",
+			"images/logo.png",
+			"js/mui.min.js",
+			"css/app.css",
+			"css/mui.min.css"
+		]
+	},
+	"examples/info.html": {
+		"resources": [
+			"images/qrcode.png"
+		]
+	},
+	"examples/login.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/app.css",
+			"css/mui.min.css",
+			"images/login-1.png"
+		]
+	}
+}

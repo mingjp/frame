@@ -1,0 +1,8 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="title">检测到新设备</view>
+  <!--<view class="newItem" wx:for="{{BluetoothList}}" data-deviceId="{{item.deviceId}}" data-name="{{item.name}}" wx:key="item.deviceId" bindtap="connectBluetooth">{{item.name}}
+    
+  </view>-->
+  <navigator class="newItem" wx:for="{{BluetoothList}}" url="../connect/index?deviceId={{item.deviceId}}&name={{item.name}}">{{item.name}}</navigator>
+</view>

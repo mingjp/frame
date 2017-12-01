@@ -1,0 +1,10 @@
+{
+	"index.html": {
+		"resources": [
+			"css/common.css",
+			"js/update.js",
+			"js/shortcut.js",
+			"js/immersed.js"
+		]
+	}
+}

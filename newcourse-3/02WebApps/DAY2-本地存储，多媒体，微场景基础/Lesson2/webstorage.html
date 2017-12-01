@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>webstorage案例</title>
+		<style type="text/css">
+			*{
+				font-size: 24px;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<fieldset id="">
+			<legend>sessionStorage 案例欣赏</legend>
+			<input type="text" name="ltext" id="stext"  placeholder="请输入您需要保存的内容"/><br><br>
+			<input type="button"  id="saveItem" onclick="ssaveData()" value="保存数据"/>
+			<input type="button"  id="readData" onclick="sreadData()" value="读取数据"/>
+			<p id="smsg"></p>
+		</fieldset>
+		<fieldset id="">
+			<legend>localStorage 案例欣赏</legend>
+			<input type="text" name="ltext" id="ltext"  placeholder="请输入您需要保存的内容"/><br><br>
+			<input type="button"  id="saveItem" onclick="lsaveData()" value="保存数据"/>
+			<input type="button"  id="readData" onclick="lreadData()" value="读取数据"/>
+			<p id="lmsg"></p>
+		</fieldset>
+	</body>
+	<script type="text/javascript">
+		/*sessionStorage方法*/
+		function ssaveData(){
+			var oDataDom = document.getElementById('stext');
+			var str = oDataDom.value;
+            
+			sessionStorage.setItem("smessage",str);
+			//sessionStorage.message = str;
+		}
+		
+		function sreadData(){
+			var oDataDom = document.getElementById('smsg');
+			//var msg = sessionStorage.getItem(smessage");
+			var msg = sessionStorage.smessage;
+			oDataDom.innerHTML = msg;
+		}
+		
+		/*localStorage方法*/
+		
+		function lsaveData(){
+			var oDataDom = document.getElementById('ltext');
+			var str = oDataDom.value;
+			localStorage.setItem("lmessage",str);
+			//localStorage.message = str;
+		}
+		
+		function lreadData(){
+			var oDataDom = document.getElementById('lmsg');
+			//var msg = localStorage.getItem("lmessage");
+			var msg = localStorage.lmessage;
+			oDataDom.innerHTML = msg;
+		}
+	</script>
+</html>

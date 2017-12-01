@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<script type="text/javascript">
+		var SetItem = localStorage.setItem;
+
+		localStorage.setItem = function(key, value, exptime) {
+		    if(exptime){
+				localStorage.setItem(key + '_expTime', new Date().getTime() + exptime);
+		    }
+		    SetItem.apply(this,arguments);
+		}
+
+		localStorage.getItem = function(key){
+			var exptime = this[key + '_expTime'];
+			if(exptime){
+				exptime = parseInt(exptime);
+				if(exptime - new Date().getTime() < 0){
+					localStorage.removeItem(key + '_expTime');
+					localStorage.removeItem(key);
+				}
+			} 
+			return this[key];
+		}
+		
+		localStorage.setItem("xxx","123", 60000);	
+
+
+		// // 修改localStorage的setItem方法
+		// localStorage.setItem = function(key,value, exptime) {
+		//     var setItemEvent = new Event("setItemEvent");
+		//     setItemEvent.value = value;
+		//     setItemEvent.key = key;
+		//     setItemEvent.exptime = exptime;
+		//     // 手动触发setItemEvent
+		//     window.dispatchEvent(setItemEvent);
+		//     // 执行原方法
+		    
+		//     SetItem.apply(this,arguments);
+		// }
+		// window.addEventListener("setItemEvent", function(e) {
+		// 	if(e.exptime){
+		// 	    console.log(e);
+		// 	    window.localStorage.setItem(e.key + '_expTime', new Date().getTime() + e.exptime);
+		// 	}
+		// });
+
+
+		// localStorage.setItem("xxx","123", 60000);		
+	</script>
+</body>
+</html>

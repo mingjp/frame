@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<script type="text/javascript" src="../../../../libs/react/react.js"></script>
+	<script type="text/javascript" src="../../../../libs/react/react-dom.js"></script>
+	<script type="text/javascript" src="../../../../libs/react/browser.min.js"></script>    
+    <title>Document</title>
+</head>
+<body>
+    <div id="app1"></div>
+
+    <script type="text/babel">
+        var MountingComponent = React.createClass({
+            getInitialState: function(){
+                console.log('initial');
+                return {data: 0};
+            },
+            setNewNumber: function(){
+                this.setState({data: this.state.data + 1});
+            },
+            componentWillReceiveProps:function(newProps) {
+                console.log('Component WILL RECEIVE PROPS!', newProps)
+            },        
+            //参数 newProps：已更新的 props
+            //参数 newState：已更新的 state  
+            //必须要返回 boolen，true 则执行componentWillUpdate、render、componentDidUpdate。反之则不执行。
+            shouldComponentUpdate: function(newProps, newState){
+                console.log('shouldComponentUpdate',newProps, newState);
+                return (newState.data > 0 && newState.data % 2 == 0);
+            },                          
+            //参数 nextProps：将要更新的 props
+            //参数 nextState：将要更新的 state
+            componentWillUpdate: function(nextProps, nextState){
+                console.log('componentWillUpdate');
+                console.log(nextProps, nextState, this.refs.p1)
+            },
+            //参数 prevProps：更新前的 props
+            //参数 nextState：更新前的 state                
+            componentDidUpdate: function(prevProps, prevState){
+                console.log('componentDidUpdate');
+                console.log(prevProps, prevState) 
+            },                   
+            render: function(){
+                console.log('render');
+                return (
+                    <div>
+                        <button onClick={this.setNewNumber}>INCREMENT</button>
+                        <h3>{this.state.data}</h3>
+                    </div>
+                );
+            }                
+        })
+        ReactDOM.render(<MountingComponent />, document.getElementById('app1'));
+    </script>
+</body>
+</html>

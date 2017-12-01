@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<script type="text/javascript" src="../../../libs/jquery/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+	<p dk-bind="name"></p>
+
+	<script type="text/javascript">
+		//全局（公共变量）
+		var age = 18;
+		var frm = (function(){
+			//私有变量
+			var name = "Tom";//
+
+			return {
+				get: function(){
+					return name;
+				},
+				set: function(val){
+					name = val;
+					$('[dk-bind]').text(name);
+				}
+			}//
+		}())
+
+		$('[dk-bind]').text(frm.get());
+
+		//frm => {get, set}
+		function funA(){
+			var name = "1";
+		}
+
+		funA();
+		name
+	</script>
+</body>
+</html>

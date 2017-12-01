@@ -1,0 +1,35 @@
+{
+  "pages":[
+    "pages/weather/index",
+    "pages/bluetooth/index",
+    "pages/cookbook/index",
+    "pages/cookbookDetail/index",
+    "pages/map/index",
+    "pages/users/index",
+    "pages/index/index"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "DK小橙絮",
+    "navigationBarTextStyle":"black",
+    "enablePullDownRefresh": true
+  },
+  "tabBar":{
+    "color": "#fff",
+    "backgroundColor": "#00BCD4",
+    "list": [{
+      "text": "天气",
+      "pagePath": "pages/weather/index"
+    },{
+      "text": "蓝牙",
+      "pagePath": "pages/bluetooth/index"
+    },{
+      "text": "菜谱",
+      "pagePath": "pages/cookbook/index"
+    },{
+      "text": "地图",
+      "pagePath": "pages/map/index"
+    }]
+  }
+}

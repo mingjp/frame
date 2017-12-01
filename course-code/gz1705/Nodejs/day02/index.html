@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="../../../../libs/jquery/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+	<!-- <form action="http://localhost:88/login" method="POST"> -->
+		<input type="text" id="username" name="username"/>
+		<input type="password" id="pwd" name="password"/>
+		<input type="button" value="login" id="btnLogin"/>		
+	<!-- </form> -->
+
+
+	<script type="text/javascript">
+		$(function(){
+			$('#btnLogin').click(function(){
+				$.get('http://localhost:88/login', {name: $('#username').val(), password: $('#pwd').name}, function(response){
+					console.log(response);
+				})
+			})
+		})
+	</script>
+</body>
+</html>

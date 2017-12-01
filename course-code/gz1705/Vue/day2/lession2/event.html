@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="../../../../../lib/vue.js"></script>
+
+	<!-- <script type="text/javascript" src="../../../../../libs/jquery/jquery-2.1.1.min.js"></script>	 -->
+</head>
+<body>
+	<div id="app">
+		<h1>{{total}}</h1>
+		<buttoncomponent :title="aa" v-on:dk="incrementTotal"></buttoncomponent>
+		<buttoncomponent :title="aa" v-on:dk="incrementTotal"></buttoncomponent>
+
+	</div>
+
+	<script type="text/javascript">
+		let imgs = new Set(); 
+    imgs.add(1）; 
+    imgs.add(1);
+    imgs.add(5);
+    imgs.add("5"); 
+    imgs.add(new String("abc"); 
+    imgs.add(new String("abc");
+		//通信
+		Vue.component('buttoncomponent', {
+			template: '<input type="button" :value="count" @click="counter"/>',
+			props: ['title'],
+			data: function(){
+				return {count: 0}
+			},
+			methods: {
+				counter: function(){
+					console.log(this.title);
+					this.count += 1;
+					this.$emit('dk');
+				}
+			}
+		})
+
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				total: 0,
+				aa: 'button component'
+			},
+			methods: {
+				incrementTotal: function(){
+					this.total += 1;
+				}
+			}
+		})
+	</script>
+</body>
+</html>

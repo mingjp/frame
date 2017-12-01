@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="../../../../../libs/jquery/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		var token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRrIiwiaWF0IjoxNTA4MjQzNzIwLCJleHAiOjE1MDgyNDUxNjB9.0OLIV0Xzu9TF-4vHRsHFbWFPkR46-7HcnlpKnjZxxMg'
+		// $.get('http://localhost:88/login', function(response){
+		// 	console.log(response);
+		// 	// document.cookie = "token="
+		// })
+
+	/*	$.post("http://localhost:88/test1", {token: token}, function(res){
+			console.log(res);
+		})*/
+
+		// $.ajax({
+		// 	type: 'POST',
+		// 	url: 'http://localhost:88/auth',
+		// 	data: {name: "dk"},
+		// 	success: function(response){
+		// 		console.log(response);
+		// 	}
+		// })
+
+		$.ajax({
+			type: 'POST',
+			url: 'http://localhost:88/test1',
+			// data: {name: "dk"},
+			headers: {'Authorization': token},
+			success: function(response){
+				console.log(response);
+			}
+		})
+	</script>
+</body>
+</html>

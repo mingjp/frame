@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>JSX</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--React 核心库-->
+        <script src="../../../../libs/react/react.js"></script>
+        <!--React 跟 Dom 相关的功能库-->
+        <script src="../../../../libs/react/react-dom.js"></script>
+        <!--jsx 转换 js 的框架 babel-->
+        <script src="../../../../libs/react/browser.min.js"></script>
+    </head>
+    <body>
+        <div id="div1"></div>
+
+        <!--jsx 语法-->
+        <script type="text/babel">
+            var Component1 = React.createClass({
+                getInitialState: function(){
+                    return {
+                        name: "Tom"
+                    }
+                },
+                changeHandler: function(event){
+                    this.setState({name: event.target.value});
+                },
+                propTypes: {
+                     name: React.PropTypes.string.isRequired
+                },
+                render: function(){
+                    return (
+                        <div>
+                            <input type="text" onChange={this.changeHandler} />
+                            <h1>{this.state.name}</h1>
+                        </div>
+                    )
+                },
+                componentWillMount: function(){
+                    console.log(1, 'componentWillMount');
+                    console.log(document.getElementsByTagName('h1'));
+                },
+                componentDidMount: function(){
+                    console.log(2, 'componentDidMount');
+                    console.log(document.getElementsByTagName('h1'));
+                },
+                componentWillUpdate: function(){
+                     console.log(3, 'componentWillUpdate');
+                },
+                componentDidUpdate: function(){
+                    console.log(4, 'componentDidUpdate');
+                }
+            });
+
+            ReactDOM.render(<Component1 name="Tom"/>, document.getElementById('div1'));
+        </script>
+    </body>
+</html>

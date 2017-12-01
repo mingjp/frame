@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="../../../../libs/angular/angular.min.js"></script>
+    </head>
+    <body ng-app="myApp">
+        <div ng-controller="myCtroller">
+            <input type="text" name="" ng-model="name">
+            <p>{{name}}</p>
+            <input type="button" name="" value="click" ng-click="click($event)">
+
+            <ul ng-repeat="obj in dataset">
+                <li ng-bind="obj.name"></li>
+                <li ng-bind="obj.age"></li>
+                <li>Index: {{$index}}</li>
+                <li ng-repeat="(key, value) in obj">key: {{key}}</li>
+            </ul>
+
+            <h3 ng-repeat="(index, value) in n">{{value}}</h3>
+
+            <h3 ng-repeat="n in [] | dk: 100"></h3>
+        </div>
+        <script>
+            var app = angular.module('myApp', []);
+            app.controller('myCtroller', function($scope){
+                $scope.click = function(event){
+                    console.log(event);
+                }
+
+                $scope.dataset = [
+                    {name: 'Tom', age: 18},                
+                    {name: 'Sam', age: 20}
+                ]
+
+                $scope.n = "abcdef";
+            })
+
+            app.filter('dk', function(){
+                return function(_array, _n){
+                    for(var i = 0; i < _n; i++){
+                        _array.push(i);
+                    }
+                    return _array;
+                }
+            })
+        </script>
+    </body>
+</html>
